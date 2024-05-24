@@ -76,16 +76,15 @@
                             <div class="header-user">
                                 <img src="{{asset('DashboardAssets/img/user2.png')}}" alt="Admin Template">
                             </div>
-                            <h5>{{Auth()->guard('admin')->user()->name}}</h5>
+                            <h5>{{Auth()->guard('employe')->user()->name}}</h5>
                             <p>Admin</p>
                         </div>
                         <a href="user-profile.html"><i class="icon-user1"></i> My Profile</a>
                         <a href="account-settings.html"><i class="icon-settings1"></i> Account Settings</a>
-                        <a href="{{route('admin.logout')}}"><i class="icon-log-out1"></i> Sign Out</a>
+                        <a href="{{route('employe.logout')}}"><i class="icon-log-out1"></i> Sign Out</a>
                     </div>
                 </div>
             </li>
-          
         </ul>
         <!-- Header actions end -->
     </div>

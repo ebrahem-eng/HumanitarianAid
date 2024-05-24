@@ -17,6 +17,7 @@ class AidRecieptCampaigns extends Model
         'date',
         'priority',
         'note',
+        'status',
         'createdBy'
     ];
 

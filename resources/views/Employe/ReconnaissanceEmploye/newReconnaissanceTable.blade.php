@@ -171,25 +171,30 @@
                                                             <div class="card-body">
                                                                 <div class="custom-dropdown-group">
                                                                     <div class="dropdown">
-                                                                        <button class="btn btn-primary dropdown-toggle"
-                                                                            type="button" id="dropdownMenuButton"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">
+                                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             Action
                                                                         </button>
-                                                                        <div class="dropdown-menu"
-                                                                            aria-labelledby="dropdownMenuButton">
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('admin.ReconnaissanceTours.edit', $newReconnaissanceEmploye->id) }}">Edit</a>
-                                                                            <form method="post"
-                                                                                action="{{ route('admin.ReconnaissanceTours.softDelete', $newReconnaissanceEmploye->id) }}">
-                                                                                @csrf
-                                                                                @method('delete')
-                                                                                <button class="dropdown-item"
-                                                                                    type="submit">Delete</button>
-                                                                            </form>
+                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                            <a class="dropdown-item" href="#" onclick="showInput('complete'); return false;">Mark As Complete</a>
+                                                                            <a class="dropdown-item" href="#" onclick="showInput('reject'); return false;">Rejecting</a>
                                                                         </div>
                                                                     </div>
+                                                                    <br>
+                                                                    <br>
+                                                                    <form method="post" id="actionForm" action="#">
+                                                                        @csrf
+                                                                        @method('put')
+                                                                        <div id="complete-input" style="display: none;">
+                                                                            <label for="note">Note:</label>
+                                                                            <input type="text" name="note" id="note">
+                                                                            <button type="submit" class="btn btn-primary" onclick="submitForm('complete'); return false;">Submit Completion</button>
+                                                                        </div>
+                                                                        <div id="reject-input" style="display: none;">
+                                                                            <label for="cause">Cause:</label>
+                                                                            <input type="text" name="cause" id="cause">
+                                                                            <button type="submit" class="btn btn-primary" onclick="submitForm('reject'); return false;">Submit Rejection</button>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -229,7 +234,28 @@
     <script src="{{ asset('DashboardAssets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('DashboardAssets/js/moment.js') }}"></script>
 
-
+    <script>
+        function showInput(action) {
+            document.getElementById('complete-input').style.display = 'none';
+            document.getElementById('reject-input').style.display = 'none';
+            
+            if (action === 'complete') {
+                document.getElementById('complete-input').style.display = 'block';
+            } else if (action === 'reject') {
+                document.getElementById('reject-input').style.display = 'block';
+            }
+        }
+    
+        function submitForm(action) {
+            const form = document.getElementById('actionForm');
+            if (action === 'complete') {
+                form.setAttribute('action', "");
+            } else if (action === 'reject') {
+                form.setAttribute('action', "");
+            }
+            form.submit();
+        }
+    </script>
     <!-- *************
    ************ Vendor Js Files *************
   ************* -->

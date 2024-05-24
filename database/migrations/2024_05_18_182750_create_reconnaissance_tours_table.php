@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('endTime');
             $table->string('priority');
             $table->string('note');
+            $table->string('reasonOfRefuse')->default('-');
             $table->tinyInteger('status')->default(0);
             $table->foreignId('createdBy')->references('id')->on('admins');
             $table->softDeletes();

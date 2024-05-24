@@ -112,6 +112,16 @@ class WebSiteController extends Controller
 
     }
 
+    public function signUp()
+    {
+        try {
+            return view('WebSite.register');
+        } catch (\Exception $ex) {
+            // return view('WebSite.404');
+            return redirect()->route('notFound');
+        }
+    }
+
     public function notFound()
     {
         return view('WebSite.404');

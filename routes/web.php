@@ -25,6 +25,7 @@ Route::get('/team', [WebSiteController::class , 'team'])->name('website.team');
 Route::get('/donors', [WebSiteController::class , 'donors'])->name('website.donors');
 Route::get('/contact', [WebSiteController::class , 'contact'])->name('website.contact');
 Route::get('/website/login', [WebSiteController::class , 'login'])->name('website.login');
+Route::get('/website/signUp', [WebSiteController::class , 'signUp'])->name('website.signUp');
 Route::get('/404', [WebSiteController::class , 'notFound'])->name('website.notFound');
 
 // Route::get('/dashboard', function () {

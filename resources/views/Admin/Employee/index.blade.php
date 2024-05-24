@@ -105,7 +105,7 @@
 
                         {{--  end message section  --}}
 
-								<div class="t-header">Association Table</div>
+								<div class="t-header">Employee Table</div>
 								<div class="table-responsive">
 									<table id="basicExample" class="table custom-table">
 										<thead>

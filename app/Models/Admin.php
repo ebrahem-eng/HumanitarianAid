@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Seeders\RequestsToIdentifyThoseInNeedSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -38,6 +39,21 @@ class Admin extends Authenticatable
     public function employee()
     {
         return $this->hasMany(Employee::class , 'createdBy');
+    }
+
+    public function AidReciept()
+    {
+        return $this->hasMany(AidRecieptCampaigns::class , 'createdBy');
+    }
+
+    public function IdentifyThoseInNeed()
+    {
+        return $this->hasMany(RequestsToIdentifyThoseInNeed::class , 'ReceivedBy');
+    }
+
+    public function ReconnaissanceTours()
+    {
+        return $this->hasMany(ReconnaissanceTours::class , 'createdBy');
     }
 
 

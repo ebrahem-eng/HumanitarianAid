@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\AidRecieptCampaigns;
-use App\Models\Employee;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +24,13 @@ class DatabaseSeeder extends Seeder
         $this->call(AssociationSeeder::class);
         $this->call(EmployeeSeeder::class);
         $this->call(AidReceiptCampaignsSeeder::class);
-
+        $this->call(VehiclesSeeder::class);
+        $this->call(DonorSeeder::class);
+        $this->call(MedicalSuppliesDonationRequestsSeeder::class);
+        $this->call(ClothingDonationRequestsSeeder::class);
+        $this->call(FoodDonationRequestsSeeder::class);
+        $this->call(RequestsForMoneyDonationsSeeder::class);
+        $this->call(RequestsToIdentifyThoseInNeedSeeder::class);
+        
     }
 }

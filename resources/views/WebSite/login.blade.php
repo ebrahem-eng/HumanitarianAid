@@ -40,7 +40,9 @@
         <div class="container text-center">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <form action="/login" method="post">
+
+                    <form action="{{route('donor.store.login')}}" method="post">
+                        @csrf
                         <i class="bi bi-person-circle display-1 text-primary"></i>
                         <h1 class="display-1">Login</h1>
                         <div class="mb-3">
@@ -51,9 +53,10 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg">Login</button>
                     </form>
+
                     <div class="mt-3">
                         <p>Forgot your password? <a href="reset-password.html">Reset it here.</a></p>
-                        <p>Not registered yet? <a href="register.html">Sign up here.</a></p>
+                        <p>Not registered yet? <a href="{{route('website.signUp')}}">Sign up here.</a></p>
                     </div>
                 </div>
             </div>

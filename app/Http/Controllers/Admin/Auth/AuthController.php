@@ -15,7 +15,7 @@ class AuthController extends Controller
         try {
             return view('Admin/Auth/login');
         } catch (\Exception $ex) {
-            return redirect()->route('notfound');
+            return redirect()->route('website.notfound');
         }
     }
 
@@ -35,7 +35,7 @@ class AuthController extends Controller
                 return redirect()->route('admin.show.login')->with('login_error_message', 'error login please enter valid username and password');
             }
         } catch (\Exception) {
-            return redirect()->route('notfound');
+            return redirect()->route('website.notfound');
         }
     }
 
@@ -47,7 +47,7 @@ class AuthController extends Controller
             FacadesAuth::guard('admin')->logout();
             return redirect()->route('admin.show.login');
         } catch (\Exception $ex) {
-            return redirect()->route('notfound');
+            return redirect()->route('website.notfound');
         }
     }
 }

@@ -32,4 +32,14 @@ class Employee extends Model
     {
         return $this->belongsTo(Admin::class , 'createdBy');
     }
+
+    public function vehicles()
+    {
+        return $this->belongsTo(Vehicles::class , 'createdBy');
+    }
+
+    public function ReconnaissanceToursEmployee()
+    {
+        return $this->belongsTo(ReconnaissanceToursEmployees::class , 'employeeID');
+    }
 }

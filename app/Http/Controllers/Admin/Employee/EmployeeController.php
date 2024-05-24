@@ -84,7 +84,7 @@ class EmployeeController extends Controller
             'createdBy'=>Auth()->guard('admin')->user()->id,
 
         ]);
-        return redirect()->back()->with('successMessage', 'Employee Created Successfully');
+        return redirect()->back()->with('successMessage', 'Employee Updated Successfully');
     }
 
     public function changePasswordPage($id)

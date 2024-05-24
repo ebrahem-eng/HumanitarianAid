@@ -30,6 +30,21 @@ class AuthController extends Controller
                 if(FacadesAuth::guard('employe')->user()->type == 5)
                 {
                     return redirect()->route('employe.reconnaissance.index');
+                }else if(FacadesAuth::guard('employe')->user()->type == 4)
+                {
+                    return redirect()->route('employe.garageManager.index');
+                }
+                else if(FacadesAuth::guard('employe')->user()->type == 3)
+                {
+                    return redirect()->route('employe.warehouseGuard.index');
+                }
+                else if(FacadesAuth::guard('employe')->user()->type == 2)
+                {
+                    return redirect()->route('employe.distributionAid.index');
+                }
+                else if(FacadesAuth::guard('employe')->user()->type == 1)
+                {
+                    return redirect()->route('employe.receivingAid.index');
                 }
 
                } else {

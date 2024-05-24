@@ -17,6 +17,7 @@ class ReconnaissanceTours extends Model
         'date',
         'priority',
         'note',
+        'reasonOfRefuse',
         'status',
         'createdBy'
     ];

@@ -175,30 +175,38 @@
                                                                             Action
                                                                         </button>
                                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                            <a class="dropdown-item" href="#" onclick="showInput('complete'); return false;">Mark As Complete</a>
-                                                                            <a class="dropdown-item" href="#" onclick="showInput('reject'); return false;">Rejecting</a>
+                                                                            <a class="dropdown-item" href="#" onclick="showInput('complete', {{ $newReconnaissanceEmploye->id }}); return false;">Mark As Complete</a>
+                                                                            <a class="dropdown-item" href="#" onclick="showInput('reject', {{ $newReconnaissanceEmploye->id }}); return false;">Rejecting</a>
                                                                         </div>
                                                                     </div>
                                                                     <br>
-                                                                    <br>
-                                                                    <form method="post" id="actionForm" action="#">
+                                                                    <form method="post" id="completeForm-{{ $newReconnaissanceEmploye->id }}" action="{{ route('employe.reconnaissance.new.mark.complete', $newReconnaissanceEmploye->id) }}">
                                                                         @csrf
                                                                         @method('put')
-                                                                        <div id="complete-input" style="display: none;">
-                                                                            <label for="note">Note:</label>
-                                                                            <input type="text" name="note" id="note">
-                                                                            <button type="submit" class="btn btn-primary" onclick="submitForm('complete'); return false;">Submit Completion</button>
+                                                                        <div id="complete-input-{{ $newReconnaissanceEmploye->id }}" style="display: none;">
+                                                                            <label for="note-{{ $newReconnaissanceEmploye->id }}">Note:</label>
+                                                                            <input type="text" name="note" id="note-{{ $newReconnaissanceEmploye->id }}">
+                                                                            <br>
+                                                                            <br>
+                                                                            <button type="submit" class="btn btn-primary">Submit Completion</button>
                                                                         </div>
-                                                                        <div id="reject-input" style="display: none;">
-                                                                            <label for="cause">Cause:</label>
-                                                                            <input type="text" name="cause" id="cause">
-                                                                            <button type="submit" class="btn btn-primary" onclick="submitForm('reject'); return false;">Submit Rejection</button>
+                                                                    </form>
+                                                                    <form method="post" id="rejectForm-{{ $newReconnaissanceEmploye->id }}" action="{{ route('employe.reconnaissance.new.reject', $newReconnaissanceEmploye->id) }}">
+                                                                        @csrf
+                                                                        @method('put')
+                                                                        <div id="reject-input-{{ $newReconnaissanceEmploye->id }}" style="display: none;">
+                                                                            <label for="cause-{{ $newReconnaissanceEmploye->id }}">Cause:</label>
+                                                                            <input type="text" name="cause" id="cause-{{ $newReconnaissanceEmploye->id }}">
+                                                                            <br>
+                                                                            <br>
+                                                                            <button type="submit" class="btn btn-primary">Submit Rejection</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
                                                 </td>
 
                                             </tr>
@@ -235,26 +243,30 @@
     <script src="{{ asset('DashboardAssets/js/moment.js') }}"></script>
 
     <script>
-        function showInput(action) {
-            document.getElementById('complete-input').style.display = 'none';
-            document.getElementById('reject-input').style.display = 'none';
-            
-            if (action === 'complete') {
-                document.getElementById('complete-input').style.display = 'block';
-            } else if (action === 'reject') {
-                document.getElementById('reject-input').style.display = 'block';
-            }
-        }
+function showInput(action, id) {
+    // Hide all complete and reject inputs
+    document.querySelectorAll('[id^="complete-input"]').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('[id^="reject-input"]').forEach(el => el.style.display = 'none');
     
-        function submitForm(action) {
-            const form = document.getElementById('actionForm');
-            if (action === 'complete') {
-                form.setAttribute('action', "");
-            } else if (action === 'reject') {
-                form.setAttribute('action', "");
-            }
-            form.submit();
-        }
+    // Show the relevant input
+    if (action === 'complete') {
+        document.getElementById(`complete-input-${id}`).style.display = 'block';
+    } else if (action === 'reject') {
+        document.getElementById(`reject-input-${id}`).style.display = 'block';
+    }
+}
+
+
+function submitForm(action, id) {
+    const form = document.getElementById(`actionForm-${id}`);
+    if (action === 'complete') {
+        form.setAttribute('action', "{{ route('employe.reconnaissance.new.mark.complete', '') }}/" + id);
+    } else if (action === 'reject') {
+        form.setAttribute('action', "{{ route('employe.reconnaissance.new.reject', '') }}/" + id);
+    }
+    form.submit();
+}
+
     </script>
     <!-- *************
    ************ Vendor Js Files *************

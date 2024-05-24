@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Employe\Auth\AuthController;
 use App\Http\Controllers\Employe\ReconnaissanceEmploye\ReconnaissanceEmployeController;
+use App\Models\ReconnaissanceToursEmployees;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,11 +33,13 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     Route::get('/reconnaissance', [ReconnaissanceEmployeController::class, 'index'])->name('reconnaissance.index');
 
+
     Route::get('/reconnaissance/new/index', [ReconnaissanceEmployeController::class, 'newReconnaissanceIndex'])->name('reconnaissance.new');
 
     //========================
 
     Route::get('/reconnaissance', [ReconnaissanceEmployeController::class, 'index'])->name('reconnaissance.index');
+
 
 
 });

@@ -21,7 +21,39 @@ class ReconnaissanceEmployeController extends Controller
     {
         $newReconnaissanceEmployeIDS = ReconnaissanceToursEmployees::where('employeeID' , Auth::guard('employe')->user()->id)->pluck('ReconnaissanceToursID');
         $newReconnaissanceEmployes = ReconnaissanceTours::with('ReconnaissanceToursEmployee')->whereIn('id' , $newReconnaissanceEmployeIDS)->where('status',0)->get();
-        // return $newReconnaissanceEmployes;
+
         return view('Employe.ReconnaissanceEmploye.newReconnaissanceTable' , compact('newReconnaissanceEmployes'));
+    }
+
+    public function newReconnaissanceMarkComplete(Request $request , $id)
+    {
+
+        $note = $request->input('note');
+
+        $reconnaissance = ReconnaissanceTours::findOrfail($id);
+
+        $reconnaissance->update([
+            'status' => 1,
+            'note' => $note,
+        ]);
+
+        return redirect()->back()->with('successMessage' , 'Reconnaissance Tours Completed Successfully');
+
+    }
+
+    public function newReconnaissanceReject(Request $request , $id)
+    {
+
+        $cause = $request->input('cause');
+
+        $reconnaissance = ReconnaissanceTours::findOrfail($id);
+
+        $reconnaissance->update([
+            'reasonOfRefuse' => $cause,
+            'status' => 2,
+        ]);
+
+
+        return redirect()->back()->with('successMessage' , 'Reconnaissance Tours Rejected Successfully');
     }
 }

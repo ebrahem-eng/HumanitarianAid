@@ -33,4 +33,10 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
     Route::get('/reconnaissance', [ReconnaissanceEmployeController::class, 'index'])->name('reconnaissance.index');
 
     Route::get('/reconnaissance/new/index', [ReconnaissanceEmployeController::class, 'newReconnaissanceIndex'])->name('reconnaissance.new');
+
+    //========================
+
+    Route::get('/reconnaissance', [ReconnaissanceEmployeController::class, 'index'])->name('reconnaissance.index');
+
+
 });

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Donor\Donate;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClothingDonationRequests;
+use App\Models\FoodDonationRequests;
 use App\Models\MedicalSuppliesDonationRequests;
+use App\Models\RequestsForMoneyDonations;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,4 +76,40 @@ class DonateController extends Controller
         
         return redirect()->back()->with('successMessage', 'Donation Successfully');
     }
+
+    public function donateMoney(Request $request)
+    {
+        $amount = $request->input('amount');
+        $invoiceNumber = mt_rand(10000, 99999);
+        $date = Carbon::now()->format('Y-m-d H:i:s');
+
+        RequestsForMoneyDonations::create([
+         'amount' => $amount,
+         'date' => $date,
+         'invoiceNumber' => $invoiceNumber,
+         'donorID' => Auth::guard('donor')->user()->id,
+        ]);
+
+        return redirect()->back()->with('successMessage', 'Donation Successfully');
+    }
+
+    public function donateFood(Request $request)
+    {
+
+        $name = $request->input('name');
+        $quantity = $request->input('quantity');
+        $size = $request->input('size');
+        $expiration = $request->input('expiration');
+
+        FoodDonationRequests::create([
+        'name' => $name,
+         'quantity' => $quantity,
+         'boxSize' => $size,
+          'expiration' => $expiration,
+          'donorID' => Auth::guard('donor')->user()->id,
+        ]);
+
+        return redirect()->back()->with('successMessage', 'Donation Successfully');
+    }
+    
 }

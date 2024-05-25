@@ -37,4 +37,12 @@ Route::middleware(['Donor'])->name('donor.')->prefix('donor')->group(function ()
     Route::post('/donate/medical' , [DonateController::class , 'donateMedical'])->name('donate.medical');
 
     Route::post('/donate/clothing' , [DonateController::class , 'donateClothing'])->name('donate.clothing');
+
+    Route::post('/donate/money' , [DonateController::class , 'donateMoney'])->name('donate.money');
+
+    Route::post('/donate/food' , [DonateController::class , 'donateFood'])->name('donate.food');
+
+    Route::get('/profile/{id}' , [DonorController::class , 'profile'])->name('profile');
+
+    Route::put('/profile/update/{id}' , [DonorController::class , 'profileUpdate'])->name('profile.update');
 });

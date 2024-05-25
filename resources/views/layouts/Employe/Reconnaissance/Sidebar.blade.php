@@ -66,10 +66,10 @@
                                 <a href="{{ route('employe.reconnaissance.new') }}">New Reconnaissance Tours</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.association.create') }}">Reconnaissance Tours History</a>
+                                <a href="{{ route('employe.reconnaissance.history') }}">Reconnaissance Tours History</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.association.archive') }}">Finished Reconnaissance Tours</a>
+                                <a href="{{ route('employe.reconnaissance.finish') }}">Finished Reconnaissance Tours</a>
                             </li>
 
                         </ul>

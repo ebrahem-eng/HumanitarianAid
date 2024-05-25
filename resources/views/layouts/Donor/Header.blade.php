@@ -47,7 +47,7 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="edit-profile.html">View and Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="{{route('donor.profile' ,Auth::guard('donor')->user()->id )}}">View and Edit Profile</a></li>
                         <li><a class="dropdown-item" href="{{route('donor.logout')}}">Log Out</a></li>
                     </ul>
                 </div>

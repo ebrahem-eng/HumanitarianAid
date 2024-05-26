@@ -22,4 +22,14 @@ class RequestsForMoneyDonationsController extends Controller
         $moneyDonations->delete();
         return redirect()->back()->with('successMessage', 'Money Donation Deleted Successfully');
     }
+
+    public function show($id)
+    {
+         $moneyDonate = RequestsForMoneyDonations::findOrfail($id);
+         $moneyDonate->update([
+            'status' => '1'
+         ]);
+
+         return redirect()->back()->with('successMessage', 'Donation Show Successfully');
+    }
 }

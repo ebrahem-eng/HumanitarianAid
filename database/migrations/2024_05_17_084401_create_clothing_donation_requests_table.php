@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->string('age');
             $table->string('size');
+            $table->tinyInteger('status')->default('0');
             $table->foreignId('donorID')->references('id')->on('donors')->cascadeOnDelete();
             $table->timestamps();
         });

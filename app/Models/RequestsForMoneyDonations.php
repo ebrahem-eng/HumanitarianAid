@@ -13,6 +13,7 @@ class RequestsForMoneyDonations extends Model
         'amount',
         'date',
         'invoiceNumber',
+        'status',
         'donorID',
     ];
 

@@ -23,4 +23,14 @@ class MedicalSuppliesDonationRequestsController extends Controller
         return redirect()->back()->with('successMessage', 'Medical Supplieses Deleted Successfully');
     }
 
+    public function show($id)
+    {
+         $medicalDonate = MedicalSuppliesDonationRequests::findOrfail($id);
+         $medicalDonate->update([
+            'status' => '1'
+         ]);
+
+         return redirect()->back()->with('successMessage', 'Donation Show Successfully');
+    }
+
 }

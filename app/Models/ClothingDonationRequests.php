@@ -14,6 +14,7 @@ class ClothingDonationRequests extends Model
         'quantity',
         'age',
         'size',
+        'status',
         'donorID',
     ];
 

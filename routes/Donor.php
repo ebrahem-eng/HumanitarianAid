@@ -32,9 +32,29 @@ Route::middleware(['Donor'])->name('donor.')->prefix('donor')->group(function ()
 
     //=========================== Donate Route =======================
 
+    Route::get('/profile/{id}' , [DonorController::class , 'profile'])->name('profile');
+
+    Route::put('/profile/update/{id}' , [DonorController::class , 'profileUpdate'])->name('profile.update');
+
     Route::get('/donate' , [DonateController::class , 'index'])->name('donate.index');
+
+    Route::get('/donate/history' , [DonateController::class , 'donateHistory'])->name('donate.history');
 
     Route::post('/donate/medical' , [DonateController::class , 'donateMedical'])->name('donate.medical');
 
     Route::post('/donate/clothing' , [DonateController::class , 'donateClothing'])->name('donate.clothing');
+
+    Route::post('/donate/money' , [DonateController::class , 'donateMoney'])->name('donate.money');
+
+    Route::post('/donate/food' , [DonateController::class , 'donateFood'])->name('donate.food');
+
+    Route::put('/donate/money/cancele/{id}' , [DonateController::class , 'donateMoneyCancele'])->name('donate.money.cancele');
+
+    Route::put('/donate/clothing/cancele/{id}' , [DonateController::class , 'donateClothingCancele'])->name('donate.clothing.cancele');
+
+    Route::put('/donate/medical/cancele/{id}' , [DonateController::class , 'donateMedicalCancele'])->name('donate.medical.cancele');
+
+    Route::put('/donate/food/cancele/{id}' , [DonateController::class , 'donateFoodCancele'])->name('donate.food.cancele');
+
+ 
 });

@@ -19,7 +19,7 @@
    ************ Common Css Files *************
   ************ -->
 
-    @include('Layouts.Admin.LinkHeader')
+    @include('Layouts.Employe.Reconnaissance.LinkHeader')
 
     <!-- *************
    ************ Vendor Css Files *************
@@ -39,7 +39,7 @@
 
         <!-- Sidebar wrapper start -->
 
-        @include('Layouts.Admin.Sidebar')
+        @include('Layouts.Employe.Reconnaissance.Sidebar')
 
         <!-- Sidebar wrapper end -->
 
@@ -51,7 +51,7 @@
 
                 <!-- Header start -->
 
-                @include('Layouts.Admin.Header')
+                @include('Layouts.Employe.Reconnaissance.Header')
 
                 <!-- Header end -->
 
@@ -105,87 +105,78 @@
 
                             {{--  end message section  --}}
 
-                            <div class="t-header">Food Donation Request Table</div>
+                            <div class="t-header">Finishing Reconnaissance Tours Table </div>
                             <div class="table-responsive">
                                 <table id="basicExample" class="table custom-table">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Box Size</th>
-                                            <th>Expiration</th>
-                                            <th>Donor Name</th>
-                                            <th>Donor Email</th>
-                                            <th>Donor Phone</th>
-                                            <th>Donation Request Status</th>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Priority</th>
+                                            <th>Note</th>
+                                            <th>Employees Name</th>
+                                            <th>Employees Email</th>
+                                            <th>Employees Phone</th>
+                                            <th>Vehicles Name - Vehicles Type - Vehicles Capacity</th>
+                                            <th>Locations Name - Location Street </th>
+                                            <th>Status</th>
+                                            <th>Created By </th>
                                             <th>Created Date </th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($foodDonations as $foodDonation)
+                                        @foreach ($finishReconnaissanceEmployes as $finishReconnaissanceEmploye)
                                             <tr>
-                                                <td>{{ $foodDonation->name }}</td>
-                                                <td>{{ $foodDonation->quantity }}</td>
-                                                <td>{{ $foodDonation->boxSize }}</td>
-                                                <td>{{ $foodDonation->expiration }}</td>
-                                                <td>{{ $foodDonation->donor->name }}</td>
-                                                <td>{{ $foodDonation->donor->email }}</td>
-                                                <td>{{ $foodDonation->donor->phone }}</td>
+                                                <td>{{ $finishReconnaissanceEmploye->name }}</td>
+                                                <td>{{ $finishReconnaissanceEmploye->date }}</td>
+                                                <td>{{ $finishReconnaissanceEmploye->startTime }}</td>
+                                                <td>{{ $finishReconnaissanceEmploye->endTime }}</td>
+                                                <td>{{ $finishReconnaissanceEmploye->priority }}</td>
+                                                <td>{{ $finishReconnaissanceEmploye->note }}</td>
                                                 <td>
-                                                    @if ($foodDonation->status == 0)
-                                                        <div class="btn btn-primary">
-                                                            Pending Admin Show
-                                                        </div>
-                                                    @elseif($foodDonation->status == 1)
+                                                    @foreach ($finishReconnaissanceEmploye->ReconnaissanceToursEmployee as $ReconnaissanceToursEmployee)
+                                                        {{ $ReconnaissanceToursEmployee->Employee->name }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($finishReconnaissanceEmploye->ReconnaissanceToursEmployee as $ReconnaissanceToursEmployee)
+                                                        {{ $ReconnaissanceToursEmployee->Employee->email }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($finishReconnaissanceEmploye->ReconnaissanceToursEmployee as $ReconnaissanceToursEmployee)
+                                                        {{ $ReconnaissanceToursEmployee->Employee->phone }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($finishReconnaissanceEmploye->ReconnaissanceToursVehicle as $ReconnaissanceToursVehicle)
+                                                        {{ $ReconnaissanceToursVehicle->vehicle->name }} -
+                                                        {{ $ReconnaissanceToursVehicle->vehicle->type }} -
+                                                        {{ $ReconnaissanceToursVehicle->vehicle->Capacity }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($finishReconnaissanceEmploye->ReconnaissanceTourLocation as $ReconnaissanceTourLocation)
+                                                        {{ $finishReconnaissanceEmployes->address }} -
+                                                        {{ $finishReconnaissanceEmployes->street }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @if ($finishReconnaissanceEmploye->status == 1)
                                                         <div class="btn btn-success">
-                                                            Show By Admin
+                                                            Completed
                                                         </div>
-                                                    @elseif($foodDonation->status == 2)
+                                                    @else
                                                         <div class="btn btn-danger">
-                                                            Canceled
+                                                            Rejected
                                                         </div>
                                                     @endif
                                                 </td>
-                                                <td>{{ $foodDonation->created_at }}</td>
-                                                <td>
-                                                    <div class="row gutters">
-                                                        <div class="col-sm-12">
-                                                            <div class="card-body">
-                                                                <div class="custom-dropdown-group">
-                                                                    <div class="dropdown">
-                                                                        <button class="btn btn-primary dropdown-toggle"
-                                                                            type="button" id="dropdownMenuButton"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">
-                                                                            Action
-                                                                        </button>
-                                                                        <div class="dropdown-menu"
-                                                                            aria-labelledby="dropdownMenuButton">
-                                                                            @if ($foodDonation->status != 1)
-                                                                                <form method="post"
-                                                                                    action="{{ route('admin.donorDonationRequests.FoodDonationRequests.show', $foodDonation->id) }}">
-                                                                                    @csrf
-                                                                                    @method('put')
-                                                                                    <button class="dropdown-item"
-                                                                                        type="submit">Mark As
-                                                                                        Show</button>
-                                                                                </form>
-                                                                            @endif
-                                                                            <form method="post"
-                                                                                action="{{ route('admin.donorDonationRequests.FoodDonationRequests.delete', $foodDonation->id) }}">
-                                                                                @csrf
-                                                                                @method('delete')
-                                                                                <button class="dropdown-item"
-                                                                                    type="submit">Delete</button>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td>{{ $finishReconnaissanceEmploye->admin->name }}</td>
+                                                <td>{{ $finishReconnaissanceEmploye->created_at }}</td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -218,7 +209,6 @@
     <script src="{{ asset('DashboardAssets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('DashboardAssets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('DashboardAssets/js/moment.js') }}"></script>
-
 
     <!-- *************
    ************ Vendor Js Files *************

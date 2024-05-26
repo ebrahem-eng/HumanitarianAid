@@ -20,13 +20,11 @@
     </div>
     <!-- Spinner End -->
 
-
     <!-- Navbar Start -->
 
     @include('Layouts.Donor.Header')
 
     <!-- Navbar End -->
-
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
@@ -43,7 +41,6 @@
     </div>
     <!-- Page Header End -->
 
-
     <!-- Donate Start -->
     <div class="container-fluid py-5">
         <div class="container">
@@ -58,24 +55,6 @@
                     <div class="h-100 bg-secondary p-5">
                         <form>
                             <div class="row g-3">
-                                {{-- <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control bg-light border-0" id="name"
-                                            placeholder="Your Name">
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="col-12">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-light border-0" id="projects">
-                                            <option value="" disabled selected>Select Project</option>
-                                            <option value="Project 1">project 1</option>
-                                            <option value="project 2">project 2</option>
-                                            <option value="project 3">project 3</option>
-                                        </select>
-                                        <label for="projects">Select Project</label>
-                                    </div>
-                                </div> --}}
                                 <div class="col-12">
                                     <div class="btn-group d-flex justify-content-around">
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
@@ -88,33 +67,35 @@
                                         <label class="btn btn-light py-3" for="btnradio3">Clothes</label>
 
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio4">
-                                        <label class="btn btn-light py-3" for="btnradio3">Food</label>
+                                        <label class="btn btn-light py-3" for="btnradio4">Food</label>
                                     </div>
                                 </div>
-
                             </div>
                         </form>
 
                         <!-- Money Donation Popup Form -->
-                        <div id="moneyPopup" class="popup-form" style="display: none; margin-top: 3%;">
-                            <div class="form-floating">
-                                <input type="number" class="form-control bg-light border-0"
-                                    placeholder="Enter amount to donate" id="moneyAmount">
-                                <label for="moneyAmount">Enter amount to donate</label>
+                        <form action="{{ route('donor.donate.money') }}" method="POST">
+                            @csrf
+                            <div id="moneyPopup" class="popup-form" style="display: block; margin-top: 3%;">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control bg-light border-0"
+                                        placeholder="Enter amount to donate" id="moneyAmount" name="amount">
+                                    <label for="moneyAmount">Enter amount to donate</label>
+                                </div>
+                                <div class="form-floating mt-2">
+                                    <select class="form-select" id="paymentWay">
+                                        <option value="syriatel">Syriatel Cash</option>
+                                        <option value="mtn">MTN Cash</option>
+                                        <option value="bbfs">BBFS</option>
+                                        <option value="paypal">PayPal</option>
+                                    </select>
+                                    <label for="paymentWay">Payment Way</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2"
+                                    onclick="donateMoney()">Donate</button>
                             </div>
-                            <div class="form-floating mt-2">
-                                <select class="form-select" id="paymentWay">
-                                    <option value="syriatel">Syriatel Cash</option>
-                                    <option value="mtn">MTN Cash</option>
-                                    <option value="bbfs">BBFS</option>
-                                    <option value="paypal">PayPal</option>
-                                </select>
-                                <label for="paymentWay">Payment Way</label>
-                            </div>
-                            <button class="btn btn-primary mt-2" onclick="donateMoney()">Donate</button>
-                        </div>
-
-                        <!-- medical Donation Popup Form -->
+                        </form>
+                        <!-- Medical Donation Popup Form -->
                         <form action="{{ route('donor.donate.medical') }}" method="POST">
                             @csrf
                             <div id="medicalPopup" class="popup-form" style="display: none; margin-top: 3%;">
@@ -130,63 +111,34 @@
                                 </div>
                                 <div class="form-floating" style="margin-top: 3%;">
                                     <input type="text" class="form-control bg-light border-0"
-                                        placeholder="Enter Note" id="medicalQuantity" name="note">
-                                    <label for="medicalQuantity">Enter Note</label>
+                                        placeholder="Enter Note" id="medicalNote" name="note">
+                                    <label for="medicalNote">Enter Note</label>
                                 </div>
-
                                 <div class="form-floating" style="margin-top: 3%;">
                                     <input type="number" class="form-control bg-light border-0"
-                                        placeholder="Enter Titer" id="medicalQuantity" name="titer">
-                                    <label for="medicalQuantity">Enter Titer</label>
+                                        placeholder="Enter Titer" id="medicalTiter" name="titer">
+                                    <label for="medicalTiter">Enter Titer</label>
                                 </div>
-
                                 <div class="form-floating" style="margin-top: 3%;">
                                     <input type="date" class="form-control bg-light border-0"
-                                        placeholder="Enter Expiration Date" id="medicalQuantity" name="expiration">
-                                    <label for="medicalQuantity">Enter Expiration Date</label>
+                                        placeholder="Enter Expiration Date" id="medicalExpiration" name="expiration">
+                                    <label for="medicalExpiration">Enter Expiration Date</label>
                                 </div>
-
-                                <br>
-
                                 <button class="btn btn-primary mt-2" onclick="addMedicalItem()">Add Item</button>
-                                {{-- <button class="btn btn-primary mt-2" onclick="showMap()">Choose Location</button> --}}
-
-                                {{-- <div id="mapContainer" style="display: none;">
-                                <iframe id="mapIframe" width="100%" height="400" frameborder="0"
-                                    style="border:0; margin-top: 20px;" allowfullscreen="" aria-hidden="false"
-                                    tabindex="0"></iframe>
-                            </div> --}}
-
                                 <div class="col-12" style="margin-top: 3%;">
                                     <button class="btn btn-primary px-5" style="height: 60px;">
                                         Donate Now
-                                        <div
-                                            class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
                                             <i class="fa fa-arrow-right"></i>
                                         </div>
                                     </button>
                                 </div>
                             </div>
                         </form>
-                        <!-- Food Donation Popup Form -->
-                        <div id="foodPopup" class="popup-form" style="display: none; margin-top: 3%;">
-                            <div class="form-floating">
-                                <input type="text" class="form-control bg-light border-0"
-                                    placeholder="Enter food item" id="foodItem">
-                                <label for="foodItem">Enter food item</label>
-                            </div>
-                            <div class="form-floating mt-2">
-                                <input type="number" class="form-control bg-light border-0"
-                                    placeholder="Enter quantity" id="foodQuantity">
-                                <label for="foodQuantity">Enter quantity</label>
-                            </div>
-                            <button class="btn btn-primary mt-2" onclick="addFoodItem()">Add Item</button>
-                        </div>
 
-
+                        <!-- Clothes Donation Popup Form -->
                         <form method="post" action="{{ route('donor.donate.clothing') }}">
                             @csrf
-                            <!-- Clothes Donation Popup Form -->
                             <div id="clothesPopup" class="popup-form" style="display: none; margin-top: 3%;">
                                 <div class="form-floating">
                                     <select class="form-select bg-light border-0" id="clothesType" name="clotheType">
@@ -200,17 +152,16 @@
                                 </div>
                                 <br>
                                 <div class="form-floating">
-                                    <select class="form-select bg-light border-0" id="clothesType" name="size">
+                                    <select class="form-select bg-light border-0" id="clothesSize" name="size">
                                         <option value="" disabled selected>Select Size</option>
                                         <option value="small">Small</option>
                                         <option value="medium">Medium</option>
-                                        <option value="larg">Larg</option>
-                                        <option value="xlarg">X-Larg</option>
-                                        <option value="xxlarg">XX-Larg</option>
+                                        <option value="large">Large</option>
+                                        <option value="xlarg">X-Large</option>
+                                        <option value="xxlarg">XX-Large</option>
                                     </select>
-                                    <label for="clothesType">Select Size</label>
+                                    <label for="clothesSize">Select Size</label>
                                 </div>
-
                                 <div class="form-floating" style="margin-top: 3%;">
                                     <input type="number" class="form-control bg-light border-0"
                                         placeholder="Enter amount" id="clothesAmount" name="quantity">
@@ -222,20 +173,10 @@
                                     <label for="clothesAge">Enter age</label>
                                 </div>
                                 <button class="btn btn-primary mt-2" onclick="addClothesItem()">Add Item</button>
-                                {{-- <button class="btn btn-primary mt-2" onclick="showClothesMap()">Choose Location</button> --}}
-
-                                <!-- Map iframe container for Clothes Donation -->
-                                {{-- <div id="clothesMapContainer" style="display: none;">
-                                <iframe id="clothesMapIframe" width="100%" height="400" frameborder="0"
-                                    style="border:0;  margin-top: 20px;" allowfullscreen="" aria-hidden="false"
-                                    tabindex="0"></iframe>
-                            </div> --}}
-
                                 <div class="col-12" style="margin-top: 3%;">
                                     <button class="btn btn-primary px-5" style="height: 60px;">
                                         Donate Now
-                                        <div
-                                            class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
                                             <i class="fa fa-arrow-right"></i>
                                         </div>
                                     </button>
@@ -243,15 +184,49 @@
                             </div>
                         </form>
 
-
-                        {{-- <div class="col-12" style="margin-top: 3%;">
-                            <button class="btn btn-primary px-5" style="height: 60px;">
-                                Donate Now
-                                <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
-                                    <i class="fa fa-arrow-right"></i>
+                        <!-- Food Donation Popup Form -->
+                        <form method="post" action="{{ route('donor.donate.food') }}">
+                            @csrf
+                            <div id="foodPopup" class="popup-form" style="display: none; margin-top: 3%;">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-light border-0" placeholder="Enter food item" id="foodItem" name="name">
+                                    <label for="foodItem">Name</label>
                                 </div>
-                            </button>
-                        </div> --}}
+                                <div class="form-floating mt-2">
+                                    <input type="number" class="form-control bg-light border-0" placeholder="Enter quantity" id="foodQuantity" name="quantity">
+                                    <label for="foodQuantity">Enter quantity</label>
+                                </div>
+
+                                <div class="form-floating" style="margin-top: 3%;">
+                                    <input type="date" class="form-control bg-light border-0"
+                                        placeholder="Enter Expiration Date" id="medicalExpiration" name="expiration">
+                                    <label for="medicalExpiration">Enter Expiration Date</label>
+                                </div>
+
+                                <div class="form-floating">
+                                    <select class="form-select bg-light border-0" id="clothesSize" name="size">
+                                        <option value="" disabled selected>Select Size</option>
+                                        <option value="small">Small</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="large">Large</option>
+                                        <option value="xlarg">X-Large</option>
+                                        <option value="xxlarg">XX-Large</option>
+                                    </select>
+                                    <label for="clothesSize">Select Size</label>
+                                </div>
+                                
+                                <button class="btn btn-primary mt-2" type="button" onclick="addFoodItem()">Add Item</button>
+                                <div class="col-12" style="margin-top: 3%;">
+                                    <button type="submit" class="btn btn-primary px-5" style="height: 60px;">
+                                        Donate Now
+                                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                                            <i class="fa fa-arrow-right"></i>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -259,66 +234,45 @@
     </div>
     <!-- Donate End -->
 
-
     <!-- Footer Start -->
 
     @include('Layouts.Donor.Footer')
 
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
 
     @include('Layouts.Donor.LinkJS')
 
     <script>
-        document.getElementById("btnradio1").addEventListener("click", function() {
+        document.getElementById("btnradio1").addEventListener("click", function () {
             document.getElementById("moneyPopup").style.display = "block";
             document.getElementById("medicalPopup").style.display = "none";
             document.getElementById("clothesPopup").style.display = "none";
-            document.getElementById("foodPopup").style.display = "none"; // Ensure foodPopup is hidden
+            document.getElementById("foodPopup").style.display = "none";
         });
 
-        document.getElementById("btnradio2").addEventListener("click", function() {
+        document.getElementById("btnradio2").addEventListener("click", function () {
             document.getElementById("moneyPopup").style.display = "none";
             document.getElementById("medicalPopup").style.display = "block";
             document.getElementById("clothesPopup").style.display = "none";
-            document.getElementById("foodPopup").style.display = "none"; // Ensure foodPopup is hidden
+            document.getElementById("foodPopup").style.display = "none";
         });
 
-        document.getElementById("btnradio3").addEventListener("click", function() {
+        document.getElementById("btnradio3").addEventListener("click", function () {
             document.getElementById("moneyPopup").style.display = "none";
             document.getElementById("medicalPopup").style.display = "none";
             document.getElementById("clothesPopup").style.display = "block";
-            document.getElementById("foodPopup").style.display = "none"; // Ensure foodPopup is hidden
+            document.getElementById("foodPopup").style.display = "none";
         });
 
-        document.getElementById("btnradio4").addEventListener("click", function() {
+        document.getElementById("btnradio4").addEventListener("click", function () {
             document.getElementById("moneyPopup").style.display = "none";
             document.getElementById("medicalPopup").style.display = "none";
             document.getElementById("clothesPopup").style.display = "none";
-            document.getElementById("foodPopup").style.display = "block"; // Show foodPopup
+            document.getElementById("foodPopup").style.display = "block";
         });
-
-
-        function donateMoney() {
-            var amount = document.getElementById("moneyAmount").value;
-            alert("Thank you for your donation of $" + amount + " towards the money project!");
-        }
-
-        function addMedicalItem() {
-            var name = document.getElementById("medicalName").value;
-            var quantity = document.getElementById("medicalQuantity").value;
-            alert("You added " + quantity + " " + name + "(s) to the medical donation list!");
-        }
-
-        function donateMedical() {
-            var name = document.getElementById("medicalName").value;
-            var quantity = document.getElementById("medicalQuantity").value;
-            alert("Thank you for donating " + quantity + " " + name + "(s) towards the medical project!");
-        }
 
         function addClothesItem() {
             var type = document.getElementById("clothesType").value;
@@ -327,34 +281,10 @@
             alert("You added a " + type + " for age " + age + " to the clothes donation list!");
         }
 
-        function donateClothes() {
-            var type = document.getElementById("clothesType").value;
-            var amount = document.getElementById("clothesAmount").value;
-            var age = document.getElementById("clothesAge").value;
-            alert("Thank you for donating a " + type + " for age " + age + " towards the clothes project!");
-        }
-
         function addFoodItem() {
             var item = document.getElementById("foodItem").value;
             var quantity = document.getElementById("foodQuantity").value;
             alert("You added " + quantity + " " + item + "(s) to the food donation list!");
-        }
-
-
-        function showMap() {
-            var mapContainer = document.getElementById("mapContainer");
-            mapContainer.style.display = "block";
-            var mapIframe = document.getElementById("mapIframe");
-            mapIframe.src =
-                "https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d151640.8795393072!2d36.35914753957196!3d33.51985508323658!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2sae!4v1712163604143!5m2!1sar!2sae";
-        }
-
-        function showClothesMap() {
-            var mapContainer = document.getElementById("clothesMapContainer");
-            mapContainer.style.display = "block";
-            var mapIframe = document.getElementById("clothesMapIframe");
-            mapIframe.src =
-                "https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d151640.8795393072!2d36.35914753957196!3d33.51985508323658!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2sae!4v1712163604143!5m2!1sar!2sae";
         }
     </script>
 </body>

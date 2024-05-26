@@ -14,6 +14,7 @@ class FoodDonationRequests extends Model
         'quantity',
         'boxSize',
         'expiration',
+        'status',
         'donorID',
     ];
 

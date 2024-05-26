@@ -16,6 +16,7 @@ return new class extends Migration
             $table->double('amount');
             $table->string('date');
             $table->integer('invoiceNumber');
+            $table->tinyInteger('status')->default('0');
             $table->foreignId('donorID')->references('id')->on('donors')->cascadeOnDelete();
             $table->timestamps();
         });

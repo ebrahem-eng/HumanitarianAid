@@ -43,12 +43,12 @@
         <div class="sidebar-menu">
             <ul>
                 <li class="active">
-                    <a href="{{ route('employe.reconnaissance.index') }}" class="current-page">
+                    <a href="{{ route('employe.receivingAid.index') }}" class="current-page">
                         <i class="icon-home2"></i>
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </li>
-     
+    
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i> 
@@ -63,7 +63,7 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="{{ route('employe.reconnaissance.new') }}">New Campaigns Received</a>
+                                <a href="{{ route('employe.receivingAid.show') }}">New Campaigns Received</a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.association.create') }}">Campaigns Received History</a>

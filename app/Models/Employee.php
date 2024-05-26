@@ -46,6 +46,13 @@ class Employee extends Authenticatable
         return $this->belongsTo(ReconnaissanceToursEmployees::class , 'employeeID');
     }
 
+    public function CampaignStaffReceivingAid()
+    {
+        return $this->belongsTo(CampaignStaffReceivingAid::class ,'employeeID');
+    }
+
+    
+
       /**
      * The attributes that should be hidden for serialization.
      *

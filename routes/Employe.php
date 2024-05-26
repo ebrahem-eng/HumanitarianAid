@@ -2,7 +2,12 @@
 
 use App\Http\Controllers\Employe\Auth\AuthController;
 use App\Http\Controllers\Employe\ReconnaissanceEmploye\ReconnaissanceEmployeController;
+
+use App\Http\Controllers\Employe\CampaignStaffReceivingAid\CampaignStaffReceivingAidController;
+use App\Models\CampaignStaffReceivingAid;
+
 use App\Models\ReconnaissanceToursEmployees;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +40,13 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     Route::get('/reconnaissance/new/index', [ReconnaissanceEmployeController::class, 'newReconnaissanceIndex'])->name('reconnaissance.new');
 
+
+    //============================== Aid Receiving Employe ==========================
+
+    Route::get('/receivingAid', [CampaignStaffReceivingAidController::class, 'index'])->name('receivingAid.index');
+
+    Route::get('/receivingAid/show', [CampaignStaffReceivingAidController::class, 'show'])->name('receivingAid.show');
+
     Route::put('reconnaissance/new/markComplete/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceMarkComplete'])->name('reconnaissance.new.mark.complete');
 
     Route::put('reconnaissance/new/reject/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceReject'])->name('reconnaissance.new.reject');
@@ -50,7 +62,7 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     //========================
 
-    Route::get('/reconnaissance', [ReconnaissanceEmployeController::class, 'index'])->name('reconnaissance.index');
+
 
 
 

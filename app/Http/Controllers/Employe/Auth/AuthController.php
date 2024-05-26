@@ -51,7 +51,7 @@ class AuthController extends Controller
                    return redirect()->route('employe.show.login')->with('login_error_message', 'error login please enter valid username and password');
                }
            } catch (\Exception) {
-               return redirect()->route('website.notfound');
+               return redirect()->route('website.notFound');
            }
        }
    

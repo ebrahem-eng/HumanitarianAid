@@ -142,20 +142,28 @@ Route::middleware(['Admin'])->name('admin.')->prefix('admin')->group(function ()
 
     Route::delete('/donorDonationRequests/MedicalSuppliesDonationRequests/delete/{id}', [MedicalSuppliesDonationRequestsController::class, 'delete'])->name('donorDonationRequests.MedicalSuppliesDonationRequests.delete');
 
+    Route::put('/donorDonationRequests/MedicalSuppliesDonationRequests/show/{id}', [MedicalSuppliesDonationRequestsController::class, 'show'])->name('donorDonationRequests.MedicalSuppliesDonationRequests.show');
+
 
     Route::get('/donorDonationRequests/ClothingDonationRequests/index', [ClothingDonationRequestsController::class, 'index'])->name('donorDonationRequests.ClothingDonationRequests.index');
 
     Route::delete('/donorDonationRequests/ClothingDonationRequests/delete/{id}', [ClothingDonationRequestsController::class, 'delete'])->name('donorDonationRequests.ClothingDonationRequests.delete');
+
+    Route::put('/donorDonationRequests/ClothingDonationRequests/show/{id}', [ClothingDonationRequestsController::class, 'show'])->name('donorDonationRequests.ClothingDonationRequests.show');
 
 
     Route::get('/donorDonationRequests/FoodDonationRequests/index', [FoodDonationRequestsController::class, 'index'])->name('donorDonationRequests.FoodDonationRequests.index');
 
     Route::delete('/donorDonationRequests/FoodDonationRequests/delete/{id}', [FoodDonationRequestsController::class, 'delete'])->name('donorDonationRequests.FoodDonationRequests.delete');
 
+    Route::put('/donorDonationRequests/FoodDonationRequests/show/{id}', [FoodDonationRequestsController::class, 'show'])->name('donorDonationRequests.FoodDonationRequests.show');
+
 
     Route::get('/donorDonationRequests/RequestsForMoneyDonation/index', [RequestsForMoneyDonationsController::class, 'index'])->name('donorDonationRequests.RequestsForMoneyDonation.index');
 
     Route::delete('/donorDonationRequests/RequestsForMoneyDonation/delete/{id}', [RequestsForMoneyDonationsController::class, 'delete'])->name('donorDonationRequests.RequestsForMoneyDonation.delete');
+
+    Route::put('/donorDonationRequests/RequestsForMoneyDonation/show/{id}', [RequestsForMoneyDonationsController::class, 'show'])->name('donorDonationRequests.RequestsForMoneyDonation.show');
 
      //=====================  Requests To Identify Those In Need Route ===============
 

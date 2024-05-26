@@ -117,6 +117,7 @@
                                             <th>Donor Name</th>
                                             <th>Donor Email</th>
                                             <th>Donor Phone</th>
+                                            <th>Donation Request Status</th>
                                             <th>Created Date </th>
                                             <th>Action</th>
                                         </tr>
@@ -131,6 +132,21 @@
                                                 <td>{{ $foodDonation->donor->name }}</td>
                                                 <td>{{ $foodDonation->donor->email }}</td>
                                                 <td>{{ $foodDonation->donor->phone }}</td>
+                                                <td>
+                                                    @if ($foodDonation->status == 0)
+                                                        <div class="btn btn-primary">
+                                                            Pending Admin Show
+                                                        </div>
+                                                    @elseif($foodDonation->status == 1)
+                                                        <div class="btn btn-success">
+                                                            Show By Admin
+                                                        </div>
+                                                    @elseif($foodDonation->status == 2)
+                                                        <div class="btn btn-danger">
+                                                            Canceled
+                                                        </div>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $foodDonation->created_at }}</td>
                                                 <td>
                                                     <div class="row gutters">
@@ -146,10 +162,22 @@
                                                                         </button>
                                                                         <div class="dropdown-menu"
                                                                             aria-labelledby="dropdownMenuButton">
-                                                                            <form method="post" action="{{ route('admin.donorDonationRequests.FoodDonationRequests.delete', $foodDonation->id) }}">
+                                                                            @if ($foodDonation->status != 1)
+                                                                                <form method="post"
+                                                                                    action="{{ route('admin.donorDonationRequests.FoodDonationRequests.show', $foodDonation->id) }}">
+                                                                                    @csrf
+                                                                                    @method('put')
+                                                                                    <button class="dropdown-item"
+                                                                                        type="submit">Mark As
+                                                                                        Show</button>
+                                                                                </form>
+                                                                            @endif
+                                                                            <form method="post"
+                                                                                action="{{ route('admin.donorDonationRequests.FoodDonationRequests.delete', $foodDonation->id) }}">
                                                                                 @csrf
                                                                                 @method('delete')
-                                                                                <button class="dropdown-item" type="submit">Delete</button>
+                                                                                <button class="dropdown-item"
+                                                                                    type="submit">Delete</button>
                                                                             </form>
                                                                         </div>
                                                                     </div>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('note');
             $table->integer('titer');
             $table->string('expiration');
+            $table->tinyInteger('status')->default('0');
             $table->foreignId('donorID')->references('id')->on('donors')->cascadeOnDelete();
             $table->timestamps();
         });

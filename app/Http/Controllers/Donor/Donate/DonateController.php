@@ -20,6 +20,15 @@ class DonateController extends Controller
         return view('Donor.donate');
     }
 
+    public function donateHistory()
+    {
+        $moneyDonations = RequestsForMoneyDonations::where('donorID' , Auth::guard('donor')->user()->id)->get();
+        $medicalDonations = MedicalSuppliesDonationRequests::where('donorID' , Auth::guard('donor')->user()->id)->get();
+        $clothingDonations = ClothingDonationRequests::where('donorID' , Auth::guard('donor')->user()->id)->get();
+        $foodDonations = FoodDonationRequests::where('donorID' , Auth::guard('donor')->user()->id)->get();
+        return view('Donor.donateHistory' , compact('moneyDonations' , 'medicalDonations' , 'clothingDonations' , 'foodDonations'));
+    }
+
     public function donateMedical(Request $request)
     {
 
@@ -110,6 +119,54 @@ class DonateController extends Controller
         ]);
 
         return redirect()->back()->with('successMessage', 'Donation Successfully');
+    }
+
+    public function donateMoneyCancele($id)
+    {
+        $moneyDonate = RequestsForMoneyDonations::findOrfail($id);
+
+        $moneyDonate->update([
+            'status' => '2'
+        ]);
+
+        return redirect()->back()->with('successMessage', 'Donation Canceled Successfully');
+
+    }
+
+    public function donateClothingCancele($id)
+    {
+        $clothingDonate = ClothingDonationRequests::findOrfail($id);
+
+        $clothingDonate->update([
+            'status' => '2'
+        ]);
+
+        return redirect()->back()->with('successMessage', 'Donation Canceled Successfully');
+
+    }
+
+    public function donateMedicalCancele($id)
+    {
+        $medicalDonate = MedicalSuppliesDonationRequests::findOrfail($id);
+
+        $medicalDonate->update([
+            'status' => '2'
+        ]);
+
+        return redirect()->back()->with('successMessage', 'Donation Canceled Successfully');
+
+    }
+
+    public function donateFoodCancele($id)
+    {
+        $foodDonate = FoodDonationRequests::findOrfail($id);
+
+        $foodDonate->update([
+            'status' => '2'
+        ]);
+
+        return redirect()->back()->with('successMessage', 'Donation Canceled Successfully');
+
     }
     
 }

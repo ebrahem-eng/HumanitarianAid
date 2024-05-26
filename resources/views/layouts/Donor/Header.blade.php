@@ -31,6 +31,7 @@
                     <div class="dropdown-menu m-0">
                         <a href="{{route('website.service')}}" class="dropdown-item">Service</a>
                         <a href="{{route('donor.donate.index')}}" class="dropdown-item">Donate</a>
+                        <a href="{{route('donor.donate.history')}}" class="dropdown-item">Donate History</a>
                         <a href="{{route('website.team')}}" class="dropdown-item">Our Team</a>
                         <a href="{{route('website.donors')}}" class="dropdown-item">Donors&nbsp;</a>
                         {{-- <a href="404.html" class="dropdown-item">404 Page</a> --}}

@@ -23,4 +23,14 @@ class ClothingDonationRequestsController extends Controller
         return redirect()->back()->with('successMessage', 'Clothing Donation Deleted Successfully');
     }
 
+    public function show($id)
+    {
+         $clothingDonate = ClothingDonationRequests::findOrfail($id);
+         $clothingDonate->update([
+            'status' => '1'
+         ]);
+
+         return redirect()->back()->with('successMessage', 'Donation Show Successfully');
+    }
+
 }

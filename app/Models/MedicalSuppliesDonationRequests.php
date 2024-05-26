@@ -15,6 +15,7 @@ class MedicalSuppliesDonationRequests extends Model
         'note',
         'titer',
         'expiration',
+        'status',
         'donorID',
     ];
 

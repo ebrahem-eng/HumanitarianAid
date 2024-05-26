@@ -23,4 +23,14 @@ class FoodDonationRequestsController extends Controller
         return redirect()->back()->with('successMessage', 'Food Donation Deleted Successfully');
     }
 
+    public function show($id)
+    {
+         $foodDonate = FoodDonationRequests::findOrfail($id);
+         $foodDonate->update([
+            'status' => '1'
+         ]);
+
+         return redirect()->back()->with('successMessage', 'Donation Show Successfully');
+    }
+
 }

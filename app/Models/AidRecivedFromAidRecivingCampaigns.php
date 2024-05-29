@@ -13,6 +13,7 @@ class AidRecivedFromAidRecivingCampaigns extends Model
         'AidReceiptID',
         'CampaignStaffReceivingAidID',
         'LocationsForAidReceivingCampaignsID',
+        'name',
         'aidType',
         'quantity',
         'note',

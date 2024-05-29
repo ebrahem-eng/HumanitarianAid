@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FoodDonationRequestsSeeder::class);
         $this->call(RequestsForMoneyDonationsSeeder::class);
         $this->call(RequestsToIdentifyThoseInNeedSeeder::class);
+        $this->call(AidSeeder::class);
         
     }
 }

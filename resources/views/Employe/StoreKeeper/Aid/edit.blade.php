@@ -19,7 +19,7 @@
 			************ Common Css Files *************
 		************ -->
 	
-        @include('Layouts.Admin.LinkHeader')
+        @include('Layouts.Employe.StoreKeeper.LinkHeader')
 
 		<!-- *************
 			************ Vendor Css Files *************
@@ -34,7 +34,7 @@
 
 			<!-- Sidebar wrapper start -->
 		
-            @include('Layouts.Admin.Sidebar')
+            @include('Layouts.Employe.StoreKeeper.Sidebar')
 
 			<!-- Sidebar wrapper end -->
 
@@ -46,7 +46,7 @@
 
 					<!-- Header start -->
 		
-                    @include('Layouts.Admin.Header')
+                    @include('Layouts.Employe.StoreKeeper.Header')
 
 					<!-- Header end -->
 
@@ -55,7 +55,7 @@
 
 						<!-- Breadcrumb start -->
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item">Create Employee</li>
+							<li class="breadcrumb-item">Edit Aid</li>
 						</ol>
 						<!-- Breadcrumb end -->
 
@@ -100,79 +100,52 @@
 
                         {{--  end message section  --}}
 
-                                <form action="{{route('admin.employee.store')}}" method="POST">
+                                <form action="{{route('employe.storeKeeper.aid.update' ,$aid->id)}}" method="POST">
                                     @csrf
+                                    @method('put')
 								<div class="card-body">
 									<div class="row gutters">
 										<div class="col-sm-4 col-12">
 											<div class="form-group">
 												<label for="inputName">Name</label>
-												<input type="text" class="form-control" id="inputName" placeholder="Enter Eployee Name" name="name" required>
-											</div>
-										</div>
-										<div class="col-sm-4 col-12">
-											<div class="form-group">
-												<label for="inputEmail">Email</label>
-												<input type="email" class="form-control" id="inputEmail" placeholder="Enter email" name="email" required>
-											</div>
-										</div>
-										<div class="col-sm-4 col-12">
-											<div class="form-group">
-												<label for="inputPwd">Password</label>
-												<input type="password" class="form-control" id="inputPwd" placeholder="Password" name="password"required>
+												<input type="text" class="form-control" id="inputName" placeholder="Enter Aid Name"
+                                                value="{{$aid->name}}" name="name" required>
 											</div>
 										</div>
                                         <div class="col-sm-4 col-12">
-											<div class="form-group">
-                                                <label for="inputPwd">Gender</label>
-												<select class="form-control form-control-lg" name="gender" required>
-													<option value="1">Female</option>
-                                                    <option value="0">Male</option>
-												</select>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-												<label for="inputPwd">Age</label>
-												<input type="number" class="form-control" id="inputAge" placeholder="Age" name="age"required>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-												<label for="inputPwd">Phone</label>
-												<input type="number" class="form-control" id="inputPhone" placeholder="Phone" name="phone" required>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-												<label for="inputPwd">Address</label>
-												<input type="text" class="form-control" id="inputPwd" placeholder="Address" name="address" required>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-                                                <label for="inputPwd">Status</label>
-												<select class="form-control form-control-lg" name="status" required>
-													<option value="1">Active</option>
-                                                    <option value="0">Not Active</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-sm-4 col-12">
 											<div class="form-group">
                                                 <label for="inputPwd">Type</label>
 												<select class="form-control form-control-lg" name="type" required>
-													<option value="1">Receiving aid</option>
-                                                    <option value="2">Distribution aid</option>                                           
-										            <option value="3">Store Keeper</option>
-													<option value="4">Garage manager</option>
-													<option value="5">Reconnaissance teams</option>
+													<option value="medical"
+                                                    {{$aid->type === 'medical' ? 'selected' : ''}}>Medical</option>
+                                                    <option value="food"
+                                                    {{$aid->type === 'food' ? 'selected' : ''}}>Food</option>
+                                                    <option value="money"
+                                                    {{$aid->type === 0 ? 'selected' : ''}}>Money</option>
+                                                    <option value="cloth"
+                                                    {{$aid->type === 0 ? 'selected' : ''}}>Cloth</option>
 												</select>
 											</div>
 										</div>
+                                    
+                                        <div class="col-sm-4 col-12">
+											<div class="form-group">
+												<label for="inputPwd">Note</label>
+												<input type="text" class="form-control" id="inputAge" placeholder="Note" 
+                                                value="{{$aid->note}}" name="note"required>
+											</div>
+										</div>
+                                        <div class="col-sm-4 col-12">
+											<div class="form-group">
+												<label for="inputPwd">Quantity</label>
+												<input type="number" class="form-control" id="inputPhone" placeholder="Quantity" 
+                                                value="{{$aid->quantity}}" name="quantity" required>
+											</div>
+										</div>
 									</div>
+
                                     <div class="row gutters">
-                                        <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+                                        <button type="submit" class="btn btn-primary mb-2">Update</button>
                                     </div>
 
 								</div>
@@ -200,7 +173,7 @@
 			**************************
 		**************************-->
 		<!-- Required jQuery first, then Bootstrap Bundle JS -->
-	@include('Layouts.Admin.LinkJS')
+	@include('Layouts.Employe.StoreKeeper.LinkJS')
 
 </body>
 

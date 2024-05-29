@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('aid_recived_from_aid_reciving_campaigns', function (Blueprint $table) {
+        Schema::create('aids', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('AidReceiptID')->references('id')->on('aid_reciept_campaigns')->cascadeOnDelete();
-            $table->integer('CampaignStaffReceivingAidID');
-            $table->integer('LocationsForAidReceivingCampaignsID');
             $table->string('name');
-            $table->string('aidType');
-            $table->integer('quantity');
+            $table->string('type');
             $table->string('note');
+            $table->string('quantity');
+            $table->foreignId('createdBy')->references('id')->on('employees')->cascadeOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('aid_recived_from_aid_reciving_campaigns');
+        Schema::dropIfExists('aids');
     }
 };

@@ -25,4 +25,24 @@ class AidDistributionCampaigns extends Model
     {
        return $this->belongsTo(Admin::class , 'createdBy');
     }
+
+    public function AidDistributionCampaignVehicles()
+    {
+       return $this->hasMany(AidDistributionCampaignVehicles::class , 'AidDistributionID');
+    }
+
+    public function AidDistributionCampaignEmploye()
+    {
+       return $this->hasMany(AidDistributionCampaignEmploye::class , 'AidDistributionID');
+    }
+
+    public function AidForAidDistributionCampaigns()
+    {
+       return $this->hasMany(AidForAidDistributionCampaigns::class , 'AidDistributionID');
+    }
+
+    public function LocationOfAidDistributionCampaigns()
+    {
+       return $this->hasMany(LocationOfAidDistributionCampaigns::class , 'AidDistributionID');
+    }
 }

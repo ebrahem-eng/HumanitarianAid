@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('note');
             $table->tinyInteger('status')->default(0);
             $table->foreignId('createdBy')->references('id')->on('admins');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('campaign_staff_receiving_aids', function (Blueprint $table) {
+        Schema::create('aid_distribution_campaign_employes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employeeID')->references('id')->on('employees')->cascadeOnDelete();
-            $table->foreignId('AidReceiptID')->references('id')->on('aid_reciept_campaigns')->cascadeOnDelete();
+            $table->foreignId('AidDistributionID')->references('id')->on('aid_distribution_campaigns')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('campaign_staff_receiving_aids');
+        Schema::dropIfExists('aid_distribution_campaign_employes');
     }
 };

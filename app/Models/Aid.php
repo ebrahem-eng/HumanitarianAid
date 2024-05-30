@@ -22,4 +22,9 @@ class Aid extends Model
     {
        return $this->belongsTo(Employee::class , 'createdBy');
     }
+
+    public function AidForAidDistributionCampaigns()
+    {
+        return $this->hasMany(AidForAidDistributionCampaigns::class , 'aidID');
+    }
 }

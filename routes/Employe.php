@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\Employe\AidReceivingEmploye\AidReceivingEmployeController;
 use App\Http\Controllers\Employe\Auth\AuthController;
 use App\Http\Controllers\Employe\ReconnaissanceEmploye\ReconnaissanceEmployeController;
 
-use App\Http\Controllers\Employe\CampaignStaffReceivingAid\CampaignStaffReceivingAidController;
 use App\Models\CampaignStaffReceivingAid;
 
 use App\Models\ReconnaissanceToursEmployees;
@@ -43,10 +43,26 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     //============================== Aid Receiving Employe ==========================
 
-    Route::get('/receivingAid', [CampaignStaffReceivingAidController::class, 'index'])->name('receivingAid.index');
+    Route::get('/receivingAid', [AidReceivingEmployeController::class, 'index'])->name('receivingAid.index');
 
-    Route::get('/receivingAid/show', [CampaignStaffReceivingAidController::class, 'show'])->name('receivingAid.show');
+    Route::get('/receivingAid/show/ListReceipt', [AidReceivingEmployeController::class, 'showListReceipt'])->name('receivingAid.show.list.receipt');
 
+    Route::get('/receivingAid/create/ListReceipt', [AidReceivingEmployeController::class, 'createNewRecipientList'])->name('receivingAid.create.list.receipt');
+
+    Route::put('/receivingAid/store/ListReceipt/{id}', [AidReceivingEmployeController::class, 'storeNewRecipientList'])->name('receivingAid.store.list.receipt');
+
+    Route::get('/receivingAid/show/PreviousReceipt', [AidReceivingEmployeController::class, 'showPreviousReceipt'])->name('receivingAid.show.list.previousReceipt');
+
+    Route::get('/receivingAid/show/ListRejectedReceipt', [AidReceivingEmployeController::class, 'showListRejectedReceipt'])->name('receivingAid.show.list.rejectedReceipt');
+
+    Route::get('/receivingAid/employe/profile/{id}', [AidReceivingEmployeController::class, 'aidReceivingEmployeProfile'])->name('receivingAid.employe.profile');
+
+    Route::put('/receivingAid/employe/profile/update/{id}', [AidReceivingEmployeController::class, 'aidReceivingEmployeProfileUpdate'])->name('receivingAid.employe.profile.update');
+
+    Route::get('/receivingAid/create/Account', [AidReceivingEmployeController::class, 'createAccount'])->name('receivingAid.create.account');
+
+
+    //==========================
     Route::put('reconnaissance/new/markComplete/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceMarkComplete'])->name('reconnaissance.new.mark.complete');
 
     Route::put('reconnaissance/new/reject/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceReject'])->name('reconnaissance.new.reject');
@@ -60,7 +76,7 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
     Route::put('/reconnaissance/employe/profile/update/{id}', [ReconnaissanceEmployeController::class, 'reconnaissanceEmployeProfileUpdate'])->name('reconnaissance.employe.profile.update');
 
 
-    //========================
+   
 
 
 

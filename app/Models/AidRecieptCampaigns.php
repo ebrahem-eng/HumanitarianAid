@@ -45,4 +45,5 @@ class AidRecieptCampaigns extends Model
     {
         return $this->hasMany(AidReceivingCampaignVehicles::class ,'AidReceiptID');
     }
+
 }

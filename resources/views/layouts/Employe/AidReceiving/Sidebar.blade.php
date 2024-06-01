@@ -63,13 +63,16 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="{{ route('employe.receivingAid.show') }}">New Campaigns Received</a>
+                                <a href="{{ route ('employe.receivingAid.show.list.receipt')}}">Campaigns Received History</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.association.create') }}">Campaigns Received History</a>
+                                <a href="{{ route('employe.receivingAid.show.list.previousReceipt') }}">Lists Of Previous Receipts</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.association.archive') }}">Finished Reconnaissance Tours</a>
+                                <a href="{{ route('employe.receivingAid.show.list.rejectedReceipt') }}">List Of Rejected Receipts</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('employe.receivingAid.create.account') }}">Create Account For Donor</a>
                             </li>
 
                         </ul>

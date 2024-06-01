@@ -55,7 +55,7 @@
 
 						<!-- Breadcrumb start -->
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item">Create Employee</li>
+							<li class="breadcrumb-item">Create Aid Distribution Campaign</li>
 						</ol>
 						<!-- Breadcrumb end -->
 
@@ -100,80 +100,51 @@
 
                         {{--  end message section  --}}
 
-                                <form action="{{route('admin.employee.store')}}" method="POST">
+                                <form action="{{route('admin.AidDistributionCampaigns.store')}}" method="POST">
                                     @csrf
 								<div class="card-body">
 									<div class="row gutters">
 										<div class="col-sm-4 col-12">
 											<div class="form-group">
 												<label for="inputName">Name</label>
-												<input type="text" class="form-control" id="inputName" placeholder="Enter Eployee Name" name="name" required>
+												<input type="text" class="form-control" id="inputName" placeholder="Enter campaign Name" name="name" required>
 											</div>
 										</div>
 										<div class="col-sm-4 col-12">
 											<div class="form-group">
-												<label for="inputEmail">Email</label>
-												<input type="email" class="form-control" id="inputEmail" placeholder="Enter email" name="email" required>
+												<label for="inputDate">Date</label>
+												<input type="date" class="form-control" id="inputDate" placeholder="Enter Date" name="date" required>
 											</div>
 										</div>
 										<div class="col-sm-4 col-12">
 											<div class="form-group">
-												<label for="inputPwd">Password</label>
-												<input type="password" class="form-control" id="inputPwd" placeholder="Password" name="password"required>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-                                                <label for="inputPwd">Gender</label>
-												<select class="form-control form-control-lg" name="gender" required>
-													<option value="1">Female</option>
-                                                    <option value="0">Male</option>
-												</select>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-												<label for="inputPwd">Age</label>
-												<input type="number" class="form-control" id="inputAge" placeholder="Age" name="age"required>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-												<label for="inputPwd">Phone</label>
-												<input type="number" class="form-control" id="inputPhone" placeholder="Phone" name="phone" required>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-												<label for="inputPwd">Address</label>
-												<input type="text" class="form-control" id="inputPwd" placeholder="Address" name="address" required>
-											</div>
-										</div>
-                                        <div class="col-sm-4 col-12">
-											<div class="form-group">
-                                                <label for="inputPwd">Status</label>
-												<select class="form-control form-control-lg" name="status" required>
-													<option value="1">Active</option>
-                                                    <option value="0">Not Active</option>
-												</select>
+												<label for="inputPwd">Start Time</label>
+												<input type="time" class="form-control" id="inputPwd" placeholder="Entet start time" name="startTime">
 											</div>
 										</div>
 										<div class="col-sm-4 col-12">
 											<div class="form-group">
-                                                <label for="inputPwd">Type</label>
-												<select class="form-control form-control-lg" name="type" required>
-													<option value="1">Receiving aid</option>
-                                                    <option value="2">Distribution aid</option>                                           
-										            <option value="3">Store Keeper</option>
-													<option value="4">Garage manager</option>
-													<option value="5">Reconnaissance teams</option>
-												</select>
+												<label for="inputPwd">End Time</label>
+												<input type="time" class="form-control" id="inputPwd" placeholder="Entet end time" name="endTime">
+											</div>
+										</div>
+										<div class="col-sm-4 col-12">
+											<div class="form-group">
+												<label for="inputName">Priority</label>
+												<input type="text" class="form-control" id="inputName" placeholder="Enter Priority" name="priority" required>
+											</div>
+										</div>
+                                        <div class="col-sm-4 col-12">
+											<div class="form-group">
+												<label for="inputName">Note</label>
+												<input type="text" class="form-control" id="inputName" placeholder="Enter Note" name="note" required>
 											</div>
 										</div>
 									</div>
-                                    <div class="row gutters">
-                                        <button type="submit" class="btn btn-primary mb-2">Confirm</button>
-                                    </div>
+									<div class="row gutters">
+										<button type="submit" class="btn btn-primary mb-2">Next</button>
+									</div>
+                                    
 
 								</div>
                             </form>
@@ -202,6 +173,6 @@
 		<!-- Required jQuery first, then Bootstrap Bundle JS -->
 	@include('Layouts.Admin.LinkJS')
 
-</body>
+ </body>
 
 </html>

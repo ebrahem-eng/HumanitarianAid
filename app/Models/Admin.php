@@ -56,6 +56,13 @@ class Admin extends Authenticatable
         return $this->hasMany(ReconnaissanceTours::class , 'createdBy');
     }
 
+    public function AidDistribution()
+    {
+        return $this->hasMany(AidDistributionCampaigns::class , 'createdBy');
+    }
+
+    
+
 
     /**
      * The attributes that should be hidden for serialization.

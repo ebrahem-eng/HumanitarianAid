@@ -28,21 +28,21 @@ class EmployeeSeeder extends Seeder
             'createdBy' => '1',
         ]);
         
+
         Employee::create([
-            'name' => 'employee1',
-            'email' => 'employee1@gmail.com',
+            'name' => 'bro',
+            'email' => 'bro@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'phone'=>'0987654321',
-            'status'=>'0',
+            'status'=>'1',
             'gender'=>'0',
-            'age'=>'30',
-            'address'=>'Homs',
+            'age'=>'40',
+            'address'=>'damas',
             'type'=>'3',
             'createdBy' => '1',
-
-
         ]);
+
         Employee::create([
             'name' => 'employee2',
             'email' => 'employee2@gmail.com',
@@ -112,6 +112,34 @@ class EmployeeSeeder extends Seeder
             'age'=>'40',
             'address'=>'damas',
             'type'=>'5',
+            'createdBy' => '1',
+        ]);
+
+        Employee::create([
+            'name' => 'employee7',
+            'email' => 'employee7@gmail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'phone'=>'0987654321',
+            'status'=>'1',
+            'gender'=>'0',
+            'age'=>'40',
+            'address'=>'damas',
+            'type'=>'2',
+            'createdBy' => '1',
+        ]);
+
+        Employee::create([
+            'name' => 'employee8',
+            'email' => 'employee8@gmail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'phone'=>'0987654321',
+            'status'=>'1',
+            'gender'=>'0',
+            'age'=>'40',
+            'address'=>'damas',
+            'type'=>'2',
             'createdBy' => '1',
         ]);
     }

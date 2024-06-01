@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AidDistributionCampaigns\AidDistributionCampaignsController;
 use App\Http\Controllers\Admin\Association\AssociationController;
 use App\Http\Controllers\Admin\Employee\EmployeeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
@@ -110,6 +111,33 @@ Route::middleware(['Admin'])->name('admin.')->prefix('admin')->group(function ()
 
     Route::get('/AidRecieptCampaigns/restore/{id}', [AidRecieptCampaignsController::class, 'restore'])->name('AidRecieptCampaigns.restore');
 
+    //===================================== Aid distribution campaigns Route =================
+
+    Route::get('/AidDistributionCampaigns/index', [AidDistributionCampaignsController::class, 'index'])->name('AidDistributionCampaigns.index');
+
+    Route::get('/AidDistributionCampaigns/create', [AidDistributionCampaignsController::class, 'create'])->name('AidDistributionCampaigns.create');
+      
+    Route::post('/AidDistributionCampaigns/store', [AidDistributionCampaignsController::class, 'store'])->name('AidDistributionCampaigns.store');
+
+    Route::post('/AidDistributionCampaigns/store/employe', [AidDistributionCampaignsController::class, 'storeEmploye'])->name('AidDistributionCampaigns.store.employe');
+
+    Route::post('/AidDistributionCampaigns/store/vehicles', [AidDistributionCampaignsController::class, 'storeVehicles'])->name('AidDistributionCampaigns.store.vehicles');
+
+    Route::post('/AidDistributionCampaigns/store/aid', [AidDistributionCampaignsController::class, 'storeAid'])->name('AidDistributionCampaigns.store.aid');
+
+    Route::post('/AidDistributionCampaigns/store/aidDistributionCampaigns', [AidDistributionCampaignsController::class, 'storeAidDistributionCampaigns'])->name('AidDistributionCampaigns.store.aidDistributionCampaigns');
+
+    Route::get('/AidDistributionCampaigns/edit/{id}', [AidDistributionCampaignsController::class, 'edit'])->name('AidDistributionCampaigns.edit');
+
+    Route::put('/AidDistributionCampaigns/update/{id}', [AidDistributionCampaignsController::class, 'update'])->name('AidDistributionCampaigns.update');
+
+    Route::get('/AidDistributionCampaigns/arhive', [AidDistributionCampaignsController::class, 'archive'])->name('AidDistributionCampaigns.archive');
+
+    Route::delete('/AidDistributionCampaigns/softDelete/{id}', [AidDistributionCampaignsController::class, 'softDelete'])->name('AidDistributionCampaigns.softDelete');
+
+    Route::delete('/AidDistributionCampaigns/forceDelete/{id}', [AidDistributionCampaignsController::class, 'forceDelete'])->name('AidDistributionCampaigns.forceDelete');
+
+    Route::get('/AidDistributionCampaigns/restore/{id}', [AidDistributionCampaignsController::class, 'restore'])->name('AidDistributionCampaigns.restore');
 
     //=====================  Vehicle Route ===============
 

@@ -26,34 +26,28 @@ class AuthController extends Controller
                    'email' => $check['email'],
                    'password' => $check['password']
                ])) {
-   
-                if(FacadesAuth::guard('employe')->user()->type == 5)
-                {
-                    return redirect()->route('employe.reconnaissance.index');
-                }else if(FacadesAuth::guard('employe')->user()->type == 4)
-                {
-                    return redirect()->route('employe.garageManager.index');
-                }
-                else if(FacadesAuth::guard('employe')->user()->type == 3)
-                {
-                    return redirect()->route('employe.warehouseGuard.index');
-                }
-                else if(FacadesAuth::guard('employe')->user()->type == 2)
-                {
-                    return redirect()->route('employe.distributionAid.index');
-                }
-                else if(FacadesAuth::guard('employe')->user()->type == 1)
-                {
-                    return redirect()->route('employe.receivingAid.index');
-                }
-
+                   $user = FacadesAuth::guard('employe')->user();
+                   switch ($user->type) {
+                       case 5:
+                           return redirect()->route('employe.reconnaissance.index');
+                       case 4:
+                           return redirect()->route('employe.garageManager.index');
+                       case 3:
+                           return redirect()->route('employe.storeKeeper.index');
+                       case 2:
+                           return redirect()->route('employe.distributionAid.index');
+                       case 1:
+                           return redirect()->route('employe.receivingAid.index');
+                       default:
+                           return redirect()->route('employe.show.login')->with('login_error_message', 'error login please enter valid username and password');
+                   }
                } else {
                    return redirect()->route('employe.show.login')->with('login_error_message', 'error login please enter valid username and password');
                }
-           } catch (\Exception) {
-               return redirect()->route('website.notFound');
+           } catch (\Exception $e) {
+               return redirect()->route('website.notFound')->with('error_message', 'An unexpected error occurred.');
            }
-       }
+       }       
    
        //تسجيل الخروج
    

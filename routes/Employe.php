@@ -4,9 +4,13 @@ use App\Http\Controllers\Employe\AidReceivingEmploye\AidReceivingEmployeControll
 use App\Http\Controllers\Employe\Auth\AuthController;
 use App\Http\Controllers\Employe\ReconnaissanceEmploye\ReconnaissanceEmployeController;
 
+
 use App\Models\CampaignStaffReceivingAid;
 
 use App\Models\ReconnaissanceToursEmployees;
+
+
+use App\Http\Controllers\Employe\StoreKeeperEmploye\StoreKeeperEmployeController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +45,7 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
     Route::get('/reconnaissance/new/index', [ReconnaissanceEmployeController::class, 'newReconnaissanceIndex'])->name('reconnaissance.new');
 
 
+
     //============================== Aid Receiving Employe ==========================
 
     Route::get('/receivingAid', [AidReceivingEmployeController::class, 'index'])->name('receivingAid.index');
@@ -63,6 +68,7 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
 
     //==========================
+
     Route::put('reconnaissance/new/markComplete/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceMarkComplete'])->name('reconnaissance.new.mark.complete');
 
     Route::put('reconnaissance/new/reject/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceReject'])->name('reconnaissance.new.reject');
@@ -75,11 +81,30 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     Route::put('/reconnaissance/employe/profile/update/{id}', [ReconnaissanceEmployeController::class, 'reconnaissanceEmployeProfileUpdate'])->name('reconnaissance.employe.profile.update');
 
+    //============================== Aid Receiving Employe ==========================
+
+    Route::get('/receivingAid', [AidReceivingEmployeController::class, 'index'])->name('receivingAid.index');
+
+    Route::get('/receivingAid/show', [AidReceivingEmployeController::class, 'show'])->name('receivingAid.show');
+
+
+    //============================== Store Keeper Employe ==========================
+
+    Route::get('/storeKeeper', [StoreKeeperEmployeController::class, 'index'])->name('storeKeeper.index');
+
 
    
 
+    Route::get('/storeKeeper/employe/profile/{id}', [StoreKeeperEmployeController::class, 'storeKeeperEmployeProfile'])->name('storeKeeper.employe.profile');
 
 
+    Route::put('/storeKeeper/employe/profile/update/{id}', [StoreKeeperEmployeController::class, 'storeKeeperEmployeProfileUpdate'])->name('storeKeeper.employe.profile.update');
 
+    Route::get('/storeKeeper/aid/index', [StoreKeeperEmployeController::class, 'aidIndex'])->name('storeKeeper.aid.index');
 
+    Route::delete('/storeKeeper/aid/delete/{id}', [StoreKeeperEmployeController::class, 'aidDelete'])->name('storeKeeper.aid.delete');
+
+    Route::get('/storeKeeper/aid/edit/{id}', [StoreKeeperEmployeController::class, 'aidEdit'])->name('storeKeeper.aid.edit');
+
+    Route::put('/storeKeeper/aid/update/{id}', [StoreKeeperEmployeController::class, 'aidUpdate'])->name('storeKeeper.aid.update');
 });

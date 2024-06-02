@@ -44,6 +44,17 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     Route::get('/reconnaissance/new/index', [ReconnaissanceEmployeController::class, 'newReconnaissanceIndex'])->name('reconnaissance.new');
 
+    Route::put('reconnaissance/new/markComplete/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceMarkComplete'])->name('reconnaissance.new.mark.complete');
+
+    Route::put('reconnaissance/new/reject/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceReject'])->name('reconnaissance.new.reject');
+
+    Route::get('/reconnaissance/history/index', [ReconnaissanceEmployeController::class, 'historyReconnaissanceIndex'])->name('reconnaissance.history');
+
+    Route::get('/reconnaissance/finish/index', [ReconnaissanceEmployeController::class, 'finishReconnaissanceIndex'])->name('reconnaissance.finish');
+
+    Route::get('/reconnaissance/employe/profile/{id}', [ReconnaissanceEmployeController::class, 'reconnaissanceEmployeProfile'])->name('reconnaissance.employe.profile');
+
+    Route::put('/reconnaissance/employe/profile/update/{id}', [ReconnaissanceEmployeController::class, 'reconnaissanceEmployeProfileUpdate'])->name('reconnaissance.employe.profile.update');
 
 
     //============================== Aid Receiving Employe ==========================
@@ -67,23 +78,7 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
     Route::get('/receivingAid/create/Account', [AidReceivingEmployeController::class, 'createAccount'])->name('receivingAid.create.account');
 
 
-    //==========================
-
-    Route::put('reconnaissance/new/markComplete/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceMarkComplete'])->name('reconnaissance.new.mark.complete');
-
-    Route::put('reconnaissance/new/reject/{id}' , [ReconnaissanceEmployeController::class , 'newReconnaissanceReject'])->name('reconnaissance.new.reject');
-
-    Route::get('/reconnaissance/history/index', [ReconnaissanceEmployeController::class, 'historyReconnaissanceIndex'])->name('reconnaissance.history');
-
-    Route::get('/reconnaissance/finish/index', [ReconnaissanceEmployeController::class, 'finishReconnaissanceIndex'])->name('reconnaissance.finish');
-
-    Route::get('/reconnaissance/employe/profile/{id}', [ReconnaissanceEmployeController::class, 'reconnaissanceEmployeProfile'])->name('reconnaissance.employe.profile');
-
-    Route::put('/reconnaissance/employe/profile/update/{id}', [ReconnaissanceEmployeController::class, 'reconnaissanceEmployeProfileUpdate'])->name('reconnaissance.employe.profile.update');
-
-    //============================== Aid Receiving Employe ==========================
-
-    Route::get('/receivingAid', [AidReceivingEmployeController::class, 'index'])->name('receivingAid.index');
+    // Route::get('/receivingAid', [AidReceivingEmployeController::class, 'index'])->name('receivingAid.index');
 
     Route::get('/receivingAid/show', [AidReceivingEmployeController::class, 'show'])->name('receivingAid.show');
 
@@ -92,11 +87,7 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     Route::get('/storeKeeper', [StoreKeeperEmployeController::class, 'index'])->name('storeKeeper.index');
 
-
-   
-
     Route::get('/storeKeeper/employe/profile/{id}', [StoreKeeperEmployeController::class, 'storeKeeperEmployeProfile'])->name('storeKeeper.employe.profile');
-
 
     Route::put('/storeKeeper/employe/profile/update/{id}', [StoreKeeperEmployeController::class, 'storeKeeperEmployeProfileUpdate'])->name('storeKeeper.employe.profile.update');
 
@@ -107,4 +98,14 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
     Route::get('/storeKeeper/aid/edit/{id}', [StoreKeeperEmployeController::class, 'aidEdit'])->name('storeKeeper.aid.edit');
 
     Route::put('/storeKeeper/aid/update/{id}', [StoreKeeperEmployeController::class, 'aidUpdate'])->name('storeKeeper.aid.update');
+
+    Route::get('/storeKeeper/AidDistributionCampaigns', [StoreKeeperEmployeController::class, 'aidDistributionCampaignsIndex'])->name('storeKeeper.aidDistributionCampaigns.index');
+
+    Route::get('/storeKeeper/AidDistributionCampaigns/aid/{id}', [StoreKeeperEmployeController::class, 'aidDistributionCampaignsAid'])->name('storeKeeper.aidDistributionCampaigns.aid');
+
+    Route::put('/storeKeeper/AidDistributionCampaigns/aid/accept/{id}', [StoreKeeperEmployeController::class, 'aidDistributionCampaignsAidAccept'])->name('storeKeeper.aidDistributionCampaigns.aid.accept');
+
+    Route::put('/storeKeeper/AidDistributionCampaigns/aid/reject/{id}', [StoreKeeperEmployeController::class, 'aidDistributionCampaignsAidReject'])->name('storeKeeper.aidDistributionCampaigns.aid.reject');
+
+    Route::get('/storeKeeper/AidDistributionCampaigns/history', [StoreKeeperEmployeController::class, 'aidDistributionCampaignsHistory'])->name('storeKeeper.aidDistributionCampaigns.history');
 });

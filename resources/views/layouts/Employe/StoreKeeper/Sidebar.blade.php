@@ -82,7 +82,11 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="{{ route('employe.storeKeeper.aid.index') }}">Aid Table</a>
+                                <a href="{{ route('employe.storeKeeper.aidDistributionCampaigns.index') }}">Aid Distribution Campaigns Table</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('employe.storeKeeper.aidDistributionCampaigns.history') }}">History Aid Distribution Campaigns Table</a>
                             </li>
                             
                         </ul>

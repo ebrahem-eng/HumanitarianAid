@@ -157,15 +157,18 @@
                                 });
                             
                                 document.getElementById('add-aid-form-btn').addEventListener('click', function () {
-                                    const newForm = document.querySelector('.aid-form').cloneNode(true);
-                                    newForm.querySelector('.quantity-input').value = '';
-                                    document.getElementById('aid-forms-container').appendChild(newForm);
-                            
-                                    const newSelect = newForm.querySelector('.aid-select');
-                                    updateMaxQuantity(newSelect);
-                                    newSelect.addEventListener('change', function () {
+                                    const existingForms = document.querySelectorAll('.aid-form');
+                                    if (existingForms.length > 0) {
+                                        const newForm = existingForms[0].cloneNode(true);
+                                        newForm.querySelectorAll('input').forEach(input => input.value = '');
+                                        document.getElementById('aid-forms-container').appendChild(newForm);
+
+                                        const newSelect = newForm.querySelector('.aid-select');
                                         updateMaxQuantity(newSelect);
-                                    });
+                                        newSelect.addEventListener('change', function () {
+                                            updateMaxQuantity(newSelect);
+                                        });
+                                    }
                                 });
                             });
                             </script>
@@ -187,15 +190,6 @@
 
     <!-- Required jQuery first, then Bootstrap Bundle JS -->
     @include('Layouts.Admin.LinkJS')
-
-    <!-- Custom JS to handle adding new aid forms -->
-    <script>
-        document.getElementById('add-aid-form-btn').addEventListener('click', function () {
-            var container = document.getElementById('aid-forms-container');
-            var newForm = container.firstElementChild.cloneNode(true);
-            container.appendChild(newForm);
-        });
-    </script>
 
 </body>
 

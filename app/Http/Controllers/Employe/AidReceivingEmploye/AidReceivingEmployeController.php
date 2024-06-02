@@ -23,63 +23,88 @@ class AidReceivingEmployeController extends Controller
         return view('Employe.AidReceivingEmployee.index');
     }
 
-    // public function showListReceipt()
-    // {
-    //     $AidRecieptCampaigns = AidRecieptCampaigns::all();
-    //     return view('Employe.AidReceivingEmployee.ShowListReceipt', compact('AidRecieptCampaigns'));
-    // }
-
-    public function showListReceipt()
+    public function newReceivingAid()
     {
         $newAidReceivingEmployeIDS = CampaignStaffReceivingAid::where('employeeID' , Auth::guard('employe')->user()->id)->pluck('AidReceiptID');
-        $newAidReceivingEmployes = AidRecieptCampaigns::with('CampaignStaff')->whereIn('id' , $newAidReceivingEmployeIDS)->where('status',0)->get();
+        $newAidReceivings = AidRecieptCampaigns::whereIn('id' , $newAidReceivingEmployeIDS)->where('status',0)->get();
 
-        return view('Employe.AidReceivingEmployee.ShowListReceipt' , compact('newAidReceivingEmployes'));
+        return view('Employe.AidReceivingEmployee.NewReceiptAid' , compact('newAidReceivings'));
     }
 
     
-    public function createNewRecipientList(Request $id)
+    public function createAid(Request $request)
     {
-        $newAidReceivingEmployeIDS = CampaignStaffReceivingAid::where('employeeID' , Auth::guard('employe')->user()->id)->pluck('AidReceiptID');
-        $newAidReceivingEmployes = AidRecieptCampaigns::with('CampaignStaff')->whereIn('id' , $newAidReceivingEmployeIDS)->where('status',0)->get();
-        return view('Employe.AidReceivingEmployee.creatNewList' , compact('newAidReceivingEmployes','id'));
+        $aidReceivingID = $request->input('aidReceivingID');
+        $aidReceiving = AidRecieptCampaigns::findOrfail($aidReceivingID);
+        return view('Employe.AidReceivingEmployee.creatNewAid' , compact('aidReceivingID' , 'aidReceiving'));
     }
 
-    public function storeNewRecipientList(Request $request)
+    public function storeAidForReceivingAid(Request $request , $id)
     {
-        $AidReceiptID=$request->input('AidReceiptID');
-        $CampaignStaffReceivingAidID =$request->input('CampaignStaffReceivingAidID');
-        $LocationsForAidReceivingCampaignsID = $request->input('LocationsForAidReceivingCampaignsID');
-        $aidType = $request->input('aidType');
-        $quantity= $request->input('quantity');
-        $note= $request->input('note');
+        $aidReceivingID  = $id;
+        foreach ($request->name as $index => $name) {
+            AidRecivedFromAidRecivingCampaigns::create([
+                'name' => $name,
+                'aidType' => $request->aidType[$index],
+                'quantity' => $request->quantity[$index],
+                'note' => $request->note[$index] ?? null,
+                'LocationsForAidReceivingCampaignsID' => $request->LocationsForAidReceivingCampaignsID[$index],
+                'CampaignStaffReceivingAidID' => Auth::guard('employe')->user()->id,
+                'AidReceiptID' => $aidReceivingID,
+            ]);
+        }
+             $aidReceiving = AidRecieptCampaigns::findOrFail($aidReceivingID);
+             $aidReceiving->update([
+                'status' => '1',
+             ]);
 
+        return redirect()->back()->with('successMessage', 'The Aid For Aid Receiving Campaigns Created Successfully');
 
-        AidRecivedFromAidRecivingCampaigns::create([
-            'AidReceiptID'=>$AidReceiptID,
-            'CampaignStaffReceivingAidID'=>$CampaignStaffReceivingAidID,
-            'LocationsForAidReceivingCampaignsID'=>$LocationsForAidReceivingCampaignsID,
-            'aidType'=>$aidType,
-            'quantity'=>$quantity,
-            'note'=>$note,
+    }
 
+    public function historyReceivingAid()
+    {
+        $AidReceivingEmployeIDS = CampaignStaffReceivingAid::where('employeeID' , Auth::guard('employe')->user()->id)->pluck('AidReceiptID');
+        $historyAidReceivings = AidRecieptCampaigns::whereIn('id' , $AidReceivingEmployeIDS)->where('status',1)->get();
+        return view('Employe.AidReceivingEmployee.historyReceiptAid' , compact('historyAidReceivings'));
+    }
+
+    public function historyAidForReceivingAid($id)
+    {
+        $aidReceivingID  = $id;
+        $aidForAidReceivings = AidRecivedFromAidRecivingCampaigns::where('AidReceiptID' , $aidReceivingID)->get() ;
+
+        return view('Employe.AidReceivingEmployee.historyAidForReceiptAid' , compact('aidForAidReceivings'));
+    }
+
+    public function createDonor()
+    {
+        return view('Employe.AidReceivingEmployee.Donor.create');
+    }
+
+    public function storeDonor(Request $request)
+    {
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $gender = $request->input('gender');
+        $status = $request->input('status');
+        $age = $request->input('age');
+        $phone = $request->input('phone');
+        $address = $request->input('address');
+
+        Donor::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'gender' => $gender,
+            'status' => $status,
+            'age' => $age,
+            'phone' => $phone,
+            'address' => $address,
         ]);
-        return redirect()->back()->with('successMessage', 'The List of Receipts Created Successfully');
+        return redirect()->back()->with('successMessage', 'Donor Created Successfully');
 
-    }
-
-    public function showPreviousReceipt()
-    {
-        $newAidReceivingEmployeIDS = AidRecivedFromAidRecivingCampaigns::where('AidReceiptID' , Auth::guard('employe')->user()->id)->pluck('CampaignStaffReceivingAidID');
-        $newAidReceivingEmployes = AidRecieptCampaigns::with('CampaignStaff')->whereIn('id' , $newAidReceivingEmployeIDS)->where('status',0)->get();
-        return view('Employe.AidReceivingEmployee.ShowListsOfPreviousReceipts' , compact('newAidReceivingEmployes'));
-    }
-
-    public function showListRejectedReceipt(Request $id)
-    {
-        $AidReceivingEmployes = AidRecieptCampaigns::all();
-
-        return view('Employe.AidReceivingEmployee.ListOfRejectedReceipts' , compact('AidReceivingEmployes'));
     }
 
 
@@ -117,46 +142,5 @@ class AidReceivingEmployeController extends Controller
 
         return redirect()->back()->with('suceessMessage' , 'Profile Updated Successfully');
     }
-
-
-    //================== craete an account for donor ========
-
-
-    public function createAccount()
-    {
-        return view('Employe.AidReceivingEmployee.createAcoount');
-    }
-
-    public function storeAccount (Request $request)
-    {
-        $name=$request->input('name');
-        $email =$request->input('email');
-        $password = $request->input('password');
-        $gender = $request->input('gender');
-        $status= $request->input('status');
-        $age= $request->input('age');
-        $phone= $request->input('phone');
-        $address= $request->input('address');
-        $img=$request->input('img');
-
-        Donor::create([
-            'name'=>$name,
-            'email'=>$email,
-            'password'=>$password,
-            'gender'=>$gender,
-            'status'=>$status,
-            'age'=>$age,
-            'phone'=>$phone,
-            'address'=>$address,
-            'img'=> $img,
-            'createdBy'=>Auth()->guard('employee')->user()->id,
-
-        ]);
-        return redirect()->back()->with('successMessage', 'Donor Created Successfully');
-
-    }
-
-
-    
 
 }

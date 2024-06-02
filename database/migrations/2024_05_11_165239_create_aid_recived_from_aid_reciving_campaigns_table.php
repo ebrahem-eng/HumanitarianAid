@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('aidType');
             $table->integer('quantity');
             $table->string('note');
+            $table->string('reasonOfRefuse')->default('-');
+            $table->tinyInteger('statusAcceptStoreKeeper')->default('0');
             $table->timestamps();
         });
     }

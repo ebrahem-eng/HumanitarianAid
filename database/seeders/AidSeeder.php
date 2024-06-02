@@ -21,5 +21,13 @@ class AidSeeder extends Seeder
             'quantity' => '20',
             'createdBy' => '1',
         ]);
+
+        Aid::create([
+            'name' => 'aid 2',
+            'type' => 'clothing',
+            'note' => 'note2',
+            'quantity' => '30',
+            'createdBy' => '1',
+        ]);
     }
 }

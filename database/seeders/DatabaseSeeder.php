@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(AssociationSeeder::class);
         $this->call(EmployeeSeeder::class);
-        $this->call(AidReceiptCampaignsSeeder::class);
+        // $this->call(AidReceiptCampaignsSeeder::class);
         $this->call(VehiclesSeeder::class);
         $this->call(DonorSeeder::class);
         $this->call(MedicalSuppliesDonationRequestsSeeder::class);
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RequestsForMoneyDonationsSeeder::class);
         $this->call(RequestsToIdentifyThoseInNeedSeeder::class);
 
-        $this->call(AidRecivedFromAidRecivingCampaigns::class);
+        // $this->call(AidRecivedFromAidRecivingCampaigns::class);
 
         $this->call(AidSeeder::class);
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Employe\StoreKeeperEmploye;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aid;
+use App\Models\AidDistributionCampaigns;
+use App\Models\AidForAidDistributionCampaigns;
 use App\Models\AidRecieptCampaigns;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -104,5 +106,66 @@ class StoreKeeperEmployeController extends Controller
         ]);
 
         return redirect()->back()->with('successMessage', 'Aid Updated Successfully');
+    }
+
+    public function aidDistributionCampaignsIndex()
+    {
+        $aidDistributionCampaigns = AidDistributionCampaigns::where('status' , '0')->get();
+        return view('Employe.StoreKeeper.AidDistributionCampaigns.aidDistributionCampaignsIndex' , compact('aidDistributionCampaigns'));
+    }
+
+    public function aidDistributionCampaignsAid($id)
+    {
+       $aidDistributionCampaignsID = $id;
+
+       $aidForaidDistributionCampaigns = AidForAidDistributionCampaigns::where('AidDistributionID' , $aidDistributionCampaignsID)->get();
+
+       return view('Employe.StoreKeeper.AidDistributionCampaigns.aidDistributionCampaignsAid' , compact('aidForaidDistributionCampaigns' , 'aidDistributionCampaignsID'));
+    }
+
+    public function aidDistributionCampaignsAidAccept(Request $request , $id)
+    {
+
+        $aidForaidDistributionCampaignsID = $id;
+        $aidDistributionCampaignsID = $request->input('aidDistributionCampaignsID');
+
+        $aidDistributionCampaigns = AidDistributionCampaigns::findOrfail($aidDistributionCampaignsID);
+        $aidForaidDistributionCampaigns = AidForAidDistributionCampaigns::findOrfail($aidForaidDistributionCampaignsID);
+
+        $aidDistributionCampaigns->update([
+            'status' => '1'
+        ]);
+
+        $aidForaidDistributionCampaigns->update([
+            'StatusReceiptStoreKeeper' => '1'
+        ]);
+        
+        return redirect()->back()->with('successMessage', 'Aid Accepted Successfully');
+    }
+
+    public function aidDistributionCampaignsAidReject(Request $request , $id)
+    {
+        $aidForaidDistributionCampaignsID = $id;
+        $aidDistributionCampaignsID = $request->input('aidDistributionCampaignsID');
+
+        $aidDistributionCampaigns = AidDistributionCampaigns::findOrfail($aidDistributionCampaignsID);
+        $aidForaidDistributionCampaigns = AidForAidDistributionCampaigns::findOrfail($aidForaidDistributionCampaignsID);
+
+        $aidDistributionCampaigns->update([
+            'status' => '1'
+        ]);
+
+        $aidForaidDistributionCampaigns->update([
+            'StatusReceiptStoreKeeper' => '2'
+        ]);
+        
+        return redirect()->back()->with('successMessage', 'Aid Rejected Successfully');
+        
+    }
+
+    public function aidDistributionCampaignsHistory()
+    {
+        $aidDistributionCampaigns = AidDistributionCampaigns::where('status' , '1')->get();
+        return view('Employe.StoreKeeper.AidDistributionCampaigns.aidDistributionCampaignsHistory' , compact('aidDistributionCampaigns'));
     }
 }

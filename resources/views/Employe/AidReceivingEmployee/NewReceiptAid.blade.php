@@ -105,28 +105,98 @@
 
                             {{--  end message section  --}}
 
-                            <div class="t-header"> Aid Receivig Table </div>
+                            <div class="t-header">New Aid Receivig Table </div>
                             <div class="table-responsive">
                                 <table id="basicExample" class="table custom-table">
                                     <thead>
                                         <tr>
-                                            <th>Receiving List Number</th>
-                                            <th>Receiving List Name</th>
-                                            <th>Reason Of Refuse</th>
+                                            <th>Name</th>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Priority</th>
+                                            <th>Note</th>
+                                            <th>Employees Name</th>
+                                            <th>Employees Email</th>
+                                            <th>Employees Phone</th>
+                                            <th>Vehicles Name - Vehicles Type - Vehicles Capacity</th>
+                                            <th>Locations Name - Location Street </th>
+                                            <th>Created By </th>
+                                            <th>Created Date </th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($AidReceivingEmployes as $AidReceivingEmploye)
+                                        @foreach ($newAidReceivings as $newAidReceiving)
                                             <tr>
-                                                <td>{{ $AidReceivingEmploye->id }}</td>
-                                                <td>{{ $AidReceivingEmploye->name }}</td>
-                                                <td>{{ $AidReceivingEmploye->reasonOfRefuse }}</td>                                                
+                                                <td>{{ $newAidReceiving->name }}</td>
+                                                <td>{{ $newAidReceiving->date }}</td>
+                                                <td>{{ $newAidReceiving->startTime }}</td>
+                                                <td>{{ $newAidReceiving->endTime }}</td>
+                                                <td>{{ $newAidReceiving->priority }}</td>
+                                                <td>{{ $newAidReceiving->note }}</td>
+                                                <td>
+                                                    @foreach ($newAidReceiving->CampaignStaff as $AidReceivingEmployee)
+                                                        {{ $AidReceivingEmployee->Employee->name }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($newAidReceiving->CampaignStaff as $AidReceivingEmployee)
+                                                        {{ $AidReceivingEmployee->Employee->email }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($newAidReceiving->CampaignStaff as $AidReceivingEmployee)
+                                                        {{ $AidReceivingEmployee->Employee->phone }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($newAidReceiving->AidReceivingCampaignVehicle as $AidReceivingVehicle)
+                                                        {{ $AidReceivingVehicle->vehicle->name }} -
+                                                        {{ $AidReceivingVehicle->vehicle->type }} -
+                                                        {{ $AidReceivingVehicle->vehicle->Capacity }}
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($newAidReceiving->LocationForAidReceiving as $AidReceivingLocation)
+                                                        {{ $AidReceivingLocation->address }} -
+                                                        {{ $AidReceivingLocation->street }}
+                                                    @endforeach
+                                                </td>
+                                                <td>{{ $newAidReceiving->admin->name }}</td>
+                                                <td>{{ $newAidReceiving->created_at }}</td>
+                                                <td>
+                                                    <div class="row gutters">
+                                                        <div class="col-sm-12">
+                                                            <div class="card-body">
+                                                                <div class="custom-dropdown-group">
+                                                                    <div class="">
+                                                                        <form method="get"
+                                                                            action="{{ route('employe.receivingAid.create.aid') }}">
+                                                                            @csrf
+                                                                            <input type="hidden" name="aidReceivingID"
+                                                                                value="{{ $newAidReceiving->id }}" />
+                                                                            <button
+                                                                                class="btn btn-primary dropdown-toggle"
+                                                                                type="submit">Create New Aid</button>
+                                                                        </form>
+                                                                    </div>
+                                                                    <br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
                 <!-- Row end -->

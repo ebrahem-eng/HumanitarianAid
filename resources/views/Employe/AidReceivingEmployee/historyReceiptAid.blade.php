@@ -105,7 +105,7 @@
 
                             {{--  end message section  --}}
 
-                            <div class="t-header"> Aid Receivig Table </div>
+                            <div class="t-header">History Aid Receivig Table </div>
                             <div class="table-responsive">
                                 <table id="basicExample" class="table custom-table">
                                     <thead>
@@ -127,60 +127,78 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($newAidReceivingEmployes as $newAidReceivingEmploye)
+                                        @foreach ($historyAidReceivings as $historyAidReceiving)
                                             <tr>
-                                                <td>{{ $newAidReceivingEmploye->name }}</td>
-                                                <td>{{ $newAidReceivingEmploye->date }}</td>
-                                                <td>{{ $newAidReceivingEmploye->startTime }}</td>
-                                                <td>{{ $newAidReceivingEmploye->endTime }}</td>
-                                                <td>{{ $newAidReceivingEmploye->priority }}</td>
-                                                <td>{{ $newAidReceivingEmploye->note }}</td>
+                                                <td>{{ $historyAidReceiving->name }}</td>
+                                                <td>{{ $historyAidReceiving->date }}</td>
+                                                <td>{{ $historyAidReceiving->startTime }}</td>
+                                                <td>{{ $historyAidReceiving->endTime }}</td>
+                                                <td>{{ $historyAidReceiving->priority }}</td>
+                                                <td>{{ $historyAidReceiving->note }}</td>
                                                 <td>
-                                                    @foreach ($newAidReceivingEmploye->CampaignStaff as $AidReceivingEmployee)
+                                                    @foreach ($historyAidReceiving->CampaignStaff as $AidReceivingEmployee)
                                                         {{ $AidReceivingEmployee->Employee->name }}
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    @foreach ($newAidReceivingEmploye->CampaignStaff as $AidReceivingEmployee)
+                                                    @foreach ($historyAidReceiving->CampaignStaff as $AidReceivingEmployee)
                                                         {{ $AidReceivingEmployee->Employee->email }}
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    @foreach ($newAidReceivingEmploye->CampaignStaff as $AidReceivingEmployee)
+                                                    @foreach ($historyAidReceiving->CampaignStaff as $AidReceivingEmployee)
                                                         {{ $AidReceivingEmployee->Employee->phone }}
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    @foreach ($newAidReceivingEmploye->AidReceivingCampaignVehicle as $AidReceivingVehicle)
+                                                    @foreach ($historyAidReceiving->AidReceivingCampaignVehicle as $AidReceivingVehicle)
                                                         {{ $AidReceivingVehicle->vehicle->name }} -
                                                         {{ $AidReceivingVehicle->vehicle->type }} -
                                                         {{ $AidReceivingVehicle->vehicle->Capacity }}
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    @foreach ($newAidReceivingEmploye->LocationForAidReceiving as $AidReceivingLocation)
+                                                    @foreach ($historyAidReceiving->LocationForAidReceiving as $AidReceivingLocation)
                                                         {{ $AidReceivingLocation->address }} -
                                                         {{ $AidReceivingLocation->street }}
                                                     @endforeach
                                                 </td>
-                                                <td>{{ $newAidReceivingEmploye->admin->name }}</td>
-                                                <td>{{ $newAidReceivingEmploye->created_at }}</td>
+                                                <td>{{ $historyAidReceiving->admin->name }}</td>
+                                                <td>{{ $historyAidReceiving->created_at }}</td>
                                                 <td>
                                                     <div class="row gutters">
                                                         <div class="col-sm-12">
                                                             <div class="card-body">
                                                                 <div class="custom-dropdown-group">
-                                                                    <div class="">
-                                                                        
-                                                                        <a href="{{route('employe.receivingAid.create.list.receipt')}}" class="btn btn-primary dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" > Create New List</a>
-
+                                                                    <div class="dropdown">
+                                                                        <button class="btn btn-primary dropdown-toggle"
+                                                                            type="button" id="dropdownMenuButton"
+                                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false">
+                                                                            Action
+                                                                        </button>
+                                                                        <div class="dropdown-menu"
+                                                                            aria-labelledby="dropdownMenuButton">
+                                                                            <form method="get"
+                                                                                action="{{ route('employe.receivingAid.history.aidForReceivingAid', $historyAidReceiving->id) }}">
+                                                                                @csrf
+                                                                                <button class="dropdown-item"
+                                                                                    type="submit">Show Aid
+                                                                                    History</button>
+                                                                            </form>
+                                                                            <form method="get"
+                                                                                action="{{ route('employe.receivingAid.create.aid') }}">
+                                                                                @csrf
+                                                                                <button class="dropdown-item"
+                                                                                    type="submit">Create New
+                                                                                    Aid</button>
+                                                                            </form>
+                                                                        </div>
                                                                     </div>
-                                                                    <br>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
                                                 </td>
 
                                             </tr>

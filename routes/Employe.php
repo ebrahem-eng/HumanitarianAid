@@ -61,27 +61,23 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     Route::get('/receivingAid', [AidReceivingEmployeController::class, 'index'])->name('receivingAid.index');
 
-    Route::get('/receivingAid/show/ListReceipt', [AidReceivingEmployeController::class, 'showListReceipt'])->name('receivingAid.show.list.receipt');
+    Route::get('/receivingAid/new', [AidReceivingEmployeController::class, 'newReceivingAid'])->name('receivingAid.new');
 
-    Route::get('/receivingAid/create/ListReceipt', [AidReceivingEmployeController::class, 'createNewRecipientList'])->name('receivingAid.create.list.receipt');
+    Route::get('/receivingAid/create/aid', [AidReceivingEmployeController::class, 'createAid'])->name('receivingAid.create.aid');
 
-    Route::put('/receivingAid/store/ListReceipt/{id}', [AidReceivingEmployeController::class, 'storeNewRecipientList'])->name('receivingAid.store.list.receipt');
+    Route::post('/receivingAid/store/{id}', [AidReceivingEmployeController::class, 'storeAidForReceivingAid'])->name('receivingAid.store.aid.receivingAid');
 
-    Route::get('/receivingAid/show/PreviousReceipt', [AidReceivingEmployeController::class, 'showPreviousReceipt'])->name('receivingAid.show.list.previousReceipt');
+    Route::get('/receivingAid/history', [AidReceivingEmployeController::class, 'historyReceivingAid'])->name('receivingAid.history');
 
-    Route::get('/receivingAid/show/ListRejectedReceipt', [AidReceivingEmployeController::class, 'showListRejectedReceipt'])->name('receivingAid.show.list.rejectedReceipt');
+    Route::get('/receivingAid/aid/history/{id}', [AidReceivingEmployeController::class, 'historyAidForReceivingAid'])->name('receivingAid.history.aidForReceivingAid');
 
     Route::get('/receivingAid/employe/profile/{id}', [AidReceivingEmployeController::class, 'aidReceivingEmployeProfile'])->name('receivingAid.employe.profile');
 
     Route::put('/receivingAid/employe/profile/update/{id}', [AidReceivingEmployeController::class, 'aidReceivingEmployeProfileUpdate'])->name('receivingAid.employe.profile.update');
 
-    Route::get('/receivingAid/create/Account', [AidReceivingEmployeController::class, 'createAccount'])->name('receivingAid.create.account');
+    Route::get('/receivingAid/donor/create', [AidReceivingEmployeController::class, 'createDonor'])->name('receivingAid.donor.create');
 
-
-    // Route::get('/receivingAid', [AidReceivingEmployeController::class, 'index'])->name('receivingAid.index');
-
-    Route::get('/receivingAid/show', [AidReceivingEmployeController::class, 'show'])->name('receivingAid.show');
-
+    Route::post('/receivingAid/donor/store', [AidReceivingEmployeController::class, 'storeDonor'])->name('receivingAid.donor.store');
 
     //============================== Store Keeper Employe ==========================
 

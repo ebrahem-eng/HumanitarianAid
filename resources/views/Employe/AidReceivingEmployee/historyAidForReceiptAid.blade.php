@@ -105,75 +105,53 @@
 
                             {{--  end message section  --}}
 
-                            <div class="t-header"> Aid Receivig Table </div>
+                            <div class="t-header">History Aid Receivig Table </div>
                             <div class="table-responsive">
                                 <table id="basicExample" class="table custom-table">
                                     <thead>
                                         <tr>
-                                            <th>Type Of Aid</th>
+                                            <th>Name</th>
+                                            <th>Aid Type</th>
                                             <th>Quantity</th>
                                             <th>Note</th>
+                                            <th>Status Accept Store Keeper</th>
+                                            <th>Reason Of Refuse</th>
+                                            <th>Address</th>
+                                            <th>Street</th>
                                             <th>Employee Name</th>
-                                            <th>Location</th>
+                                            <th>Employee Email</th>
+                                            <th>Created Date </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($newAidReceivingEmployes as $newAidReceivingEmploye)
+                                        @foreach ($aidForAidReceivings as $aidForAidReceiving)
                                             <tr>
-                                                <td>{{ $newAidReceivingEmploye->name }}</td>
-                                                <td>{{ $newAidReceivingEmploye->date }}</td>
-                                                <td>{{ $newAidReceivingEmploye->startTime }}</td>
-                                                <td>{{ $newAidReceivingEmploye->endTime }}</td>
-                                                <td>{{ $newAidReceivingEmploye->priority }}</td>
-                                                <td>{{ $newAidReceivingEmploye->note }}</td>
+                                                <td>{{ $aidForAidReceiving->name }}</td>
+                                                <td>{{ $aidForAidReceiving->aidType }}</td>
+                                                <td>{{ $aidForAidReceiving->quantity }}</td>
+                                                <td>{{ $aidForAidReceiving->note }}</td>
                                                 <td>
-                                                    @foreach ($newAidReceivingEmploye->CampaignStaff as $AidReceivingEmployee)
-                                                        {{ $AidReceivingEmployee->Employee->name }}
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    @foreach ($newAidReceivingEmploye->CampaignStaff as $AidReceivingEmployee)
-                                                        {{ $AidReceivingEmployee->Employee->email }}
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    @foreach ($newAidReceivingEmploye->CampaignStaff as $AidReceivingEmployee)
-                                                        {{ $AidReceivingEmployee->Employee->phone }}
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    @foreach ($newAidReceivingEmploye->AidReceivingCampaignVehicle as $AidReceivingVehicle)
-                                                        {{ $AidReceivingVehicle->vehicle->name }} -
-                                                        {{ $AidReceivingVehicle->vehicle->type }} -
-                                                        {{ $AidReceivingVehicle->vehicle->Capacity }}
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    @foreach ($newAidReceivingEmploye->LocationForAidReceiving as $AidReceivingLocation)
-                                                        {{ $AidReceivingLocation->address }} -
-                                                        {{ $AidReceivingLocation->street }}
-                                                    @endforeach
-                                                </td>
-                                                <td>{{ $newAidReceivingEmploye->admin->name }}</td>
-                                                <td>{{ $newAidReceivingEmploye->created_at }}</td>
-                                                <td>
-                                                    <div class="row gutters">
-                                                        <div class="col-sm-12">
-                                                            <div class="card-body">
-                                                                <div class="custom-dropdown-group">
-                                                                    <div class="">
-                                                                        
-                                                                        <a href="{{route('employe.receivingAid.create.list.receipt')}}" class="btn btn-primary dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" > Create New List</a>
-
-                                                                    </div>
-                                                                    <br>
-                                                                </div>
-                                                            </div>
+                                                    @if ($aidForAidReceiving->statusAcceptStoreKeeper == 0)
+                                                        <div class="btn btn-primary">
+                                                            Pending Accept
                                                         </div>
-                                                    </div>
-                                                    
-                                                </td>
+                                                    @elseif($aidForAidReceiving->statusAcceptStoreKeeper == 1)
+                                                        <div class="btn btn-success">
+                                                            Accepted
+                                                        </div>
+                                                    @elseif($aidForAidReceiving->statusAcceptStoreKeeper == 2)
+                                                        <div class="btn btn-danger">
+                                                            Rejected
+                                                        </div>
+                                                    @endif
 
+                                                </td>
+                                                <td>{{ $aidForAidReceiving->reasonOfRefuse }}</td>
+                                                <td>{{ $aidForAidReceiving->LocationForAidReceiving->address }}</td>
+                                                <td>{{ $aidForAidReceiving->LocationForAidReceiving->street }}</td>
+                                                <td>{{ $aidForAidReceiving->EmployeAidReciept->Employee->name }}</td>
+                                                <td>{{ $aidForAidReceiving->EmployeAidReciept->Employee->email }}</td>
+                                                <td>{{ $aidForAidReceiving->created_at }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

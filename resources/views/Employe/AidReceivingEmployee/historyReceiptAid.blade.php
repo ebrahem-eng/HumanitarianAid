@@ -189,6 +189,8 @@
                                                                             <form method="get"
                                                                                 action="{{ route('employe.receivingAid.create.aid') }}">
                                                                                 @csrf
+                                                                                <input type="hidden" name="aidReceivingID"
+                                                                                value="{{ $historyAidReceiving->id }}" />
                                                                                 <button class="dropdown-item"
                                                                                     type="submit">Create New
                                                                                     Aid</button>

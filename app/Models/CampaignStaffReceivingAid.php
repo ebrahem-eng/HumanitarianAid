@@ -22,6 +22,6 @@ class CampaignStaffReceivingAid extends Model
 
     public function Employee()
     {
-        return $this->belongsTo(Employee::class , 'AidReceiptID');
+        return $this->belongsTo(Employee::class , 'employeeID');
     }
 }

@@ -48,7 +48,7 @@ class Employee extends Authenticatable
 
     public function CampaignStaffReceivingAid()
     {
-        return $this->belongsTo(CampaignStaffReceivingAid::class ,'employeeID');
+        return $this->hasMany(CampaignStaffReceivingAid::class ,'employeeID');
     }
 
     public function AidDistributionCampaignEmploye()

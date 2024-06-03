@@ -42,14 +42,15 @@ class AidReceivingEmployeController extends Controller
     public function storeAidForReceivingAid(Request $request , $id)
     {
         $aidReceivingID  = $id;
+        $StaffReceivingID = CampaignStaffReceivingAid::where('employeeID' , Auth::guard('employe')->user()->id)->where('AidReceiptID' ,$aidReceivingID )->value('id');
         foreach ($request->name as $index => $name) {
             AidRecivedFromAidRecivingCampaigns::create([
                 'name' => $name,
                 'aidType' => $request->aidType[$index],
                 'quantity' => $request->quantity[$index],
                 'note' => $request->note[$index] ?? null,
-                'LocationsForAidReceivingCampaignsID' => $request->LocationsForAidReceivingCampaignsID[$index],
-                'CampaignStaffReceivingAidID' => Auth::guard('employe')->user()->id,
+                'LocationID' => $request->LocationsForAidReceivingCampaignsID[$index],
+                'StaffReceivingID' =>$StaffReceivingID ,
                 'AidReceiptID' => $aidReceivingID,
             ]);
         }

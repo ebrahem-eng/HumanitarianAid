@@ -11,8 +11,8 @@ class AidRecivedFromAidRecivingCampaigns extends Model
 
     protected $fillable = [
         'AidReceiptID',
-        'CampaignStaffReceivingAidID',
-        'LocationsForAidReceivingCampaignsID',
+        'StaffReceivingID',
+        'LocationID',
         'name',
         'aidType',
         'quantity',
@@ -28,7 +28,7 @@ class AidRecivedFromAidRecivingCampaigns extends Model
 
     public function LocationForAidReceiving()
     {
-        return $this->belongsTo(LocationForAidReceivingCampaigns::class, 'LocationsForAidReceivingCampaignsID');
+        return $this->belongsTo(LocationForAidReceivingCampaigns::class, 'LocationID');
     }
 
     public function EmployeAidReciept()

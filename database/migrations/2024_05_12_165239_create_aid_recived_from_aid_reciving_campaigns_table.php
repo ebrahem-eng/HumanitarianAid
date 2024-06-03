@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('aid_recived_from_aid_reciving_campaigns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('AidReceiptID')->references('id')->on('aid_reciept_campaigns')->cascadeOnDelete();
-            $table->integer('CampaignStaffReceivingAidID');
-            $table->integer('LocationsForAidReceivingCampaignsID');
+            $table->foreignId('StaffReceivingID')->references('id')->on('campaign_staff_receiving_aids')->cascadeOnDelete();
+            $table->foreignId('LocationID')->references('id')->on('location_for_aid_receiving_campaigns')->cascadeOnDelete();
             $table->string('name');
             $table->string('aidType');
             $table->integer('quantity');

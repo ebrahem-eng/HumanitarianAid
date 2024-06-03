@@ -104,4 +104,13 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
     Route::put('/storeKeeper/AidDistributionCampaigns/aid/reject/{id}', [StoreKeeperEmployeController::class, 'aidDistributionCampaignsAidReject'])->name('storeKeeper.aidDistributionCampaigns.aid.reject');
 
     Route::get('/storeKeeper/AidDistributionCampaigns/history', [StoreKeeperEmployeController::class, 'aidDistributionCampaignsHistory'])->name('storeKeeper.aidDistributionCampaigns.history');
+
+    Route::get('/storeKeeper/AidReceiving', [StoreKeeperEmployeController::class, 'aidReceivingIndex'])->name('storeKeeper.aidReceiving.index');
+
+    Route::get('/storeKeeper/AidReceiving/aid/{id}', [StoreKeeperEmployeController::class, 'aidReceivingAid'])->name('storeKeeper.aidReceiving.aid');
+
+    Route::put('/storeKeeper/AidReceiving/aid/accept/{id}', [StoreKeeperEmployeController::class, 'aidReceivingAidAccept'])->name('storeKeeper.aidReceiving.aid.accept');
+
+    Route::put('/storeKeeper/AidReceiving/reject/aid/{id}', [StoreKeeperEmployeController::class, 'aidReceivingAidReject'])->name('storeKeeper.aidReceiving.aid.reject');
+    
 });

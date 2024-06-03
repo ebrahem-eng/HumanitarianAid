@@ -105,107 +105,85 @@
 
                             {{--  end message section  --}}
 
-                            <div class="t-header">Aid For Aid Distribution Campaign Table </div>
+                            <div class="t-header">Aid For Aid Receivig Table </div>
                             <div class="table-responsive">
                                 <table id="basicExample" class="table custom-table">
                                     <thead>
                                         <tr>
-                                            <th>Aid Name</th>
+                                            <th>Name</th>
                                             <th>Aid Type</th>
-                                            <th>Aid Note</th>
-                                            <th>Aid Original Quantity</th>
-                                            <th>Distribution Quantity</th>
-                                            <th>Distribution Type</th>
-                                            <th>Status Receipt Store Keeper</th>
-                                            <th>Returned Quantity</th>
-                                            <th>Reason For Return</th>
-                                            <th>Aid Delivery Status</th>
+                                            <th>Quantity</th>
                                             <th>Note</th>
+                                            <th>Status Accept Store Keeper</th>
+                                            <th>Reason Of Refuse</th>
+                                            <th>Address</th>
+                                            <th>Street</th>
+                                            <th>Employee Name</th>
+                                            <th>Employee Email</th>
+                                            <th>Created Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($aidForaidDistributionCampaigns as $aidForaidDistributionCampaign)
+                                        @foreach ($aidForAidReceivings as $aidForAidReceiving)
                                             <tr>
-                                                <td>{{ $aidForaidDistributionCampaign->aid->name }}</td>
-                                                <td>{{ $aidForaidDistributionCampaign->aid->type }}</td>
-                                                <td>{{ $aidForaidDistributionCampaign->aid->note }}</td>
-                                                <td>{{ $aidForaidDistributionCampaign->aid->quantity }}</td>
-                                                <td>{{ $aidForaidDistributionCampaign->quantity }}</td>
-                                                <td>{{ $aidForaidDistributionCampaign->distributionType }}</td>
+                                                <td>{{ $aidForAidReceiving->name }}</td>
+                                                <td>{{ $aidForAidReceiving->aidType }}</td>
+                                                <td>{{ $aidForAidReceiving->quantity }}</td>
+                                                <td>{{ $aidForAidReceiving->note }}</td>
                                                 <td>
-                                                    @if ($aidForaidDistributionCampaign->StatusReceiptStoreKeeper == 0)
+                                                    @if ($aidForAidReceiving->statusAcceptStoreKeeper == 0)
                                                         <div class="btn btn-primary">
                                                             Pending Accept
                                                         </div>
-                                                    @elseif($aidForaidDistributionCampaign->StatusReceiptStoreKeeper == 1)
+                                                    @elseif($aidForAidReceiving->statusAcceptStoreKeeper == 1)
                                                         <div class="btn btn-success">
                                                             Accepted
                                                         </div>
-                                                    @elseif($aidForaidDistributionCampaign->StatusReceiptStoreKeeper == 2)
+                                                    @elseif($aidForAidReceiving->statusAcceptStoreKeeper == 2)
                                                         <div class="btn btn-danger">
                                                             Rejected
                                                         </div>
                                                     @endif
                                                 </td>
-                                                <td>{{ $aidForaidDistributionCampaign->returnedQuantity }}</td>
-                                                <td>{{ $aidForaidDistributionCampaign->ReasonForReturn }}</td>
+                                                <td>{{ $aidForAidReceiving->reasonOfRefuse }}</td>
+                                                <td>{{ $aidForAidReceiving->LocationForAidReceiving->address }}</td>
+                                                <td>{{ $aidForAidReceiving->LocationForAidReceiving->street }}</td>
+                                                <td>{{ $aidForAidReceiving->EmployeAidReciept->Employee->name }}</td>
+                                                <td>{{ $aidForAidReceiving->EmployeAidReciept->Employee->email }}</td>
+                                                <td>{{ $aidForAidReceiving->created_at }}</td>
                                                 <td>
-                                                    @if ($aidForaidDistributionCampaign->AidDeliveryStatus == 0)
-                                                        <div class="btn btn-primary">
-                                                            Waiting For Distribution
-                                                        </div>
-                                                    @elseif($aidForaidDistributionCampaign->AidDeliveryStatus == 1)
-                                                        <div class="btn btn-success">
-                                                            Distribution Done
-                                                        </div>
-                                                    @elseif($aidForaidDistributionCampaign->AidDeliveryStatus == 2)
-                                                        <div class="btn btn-danger">
-                                                            Part was delivered and part was returned
-                                                        </div>
-                                                    @elseif($aidForaidDistributionCampaign->AidDeliveryStatus == 3)
-                                                        <div class="btn btn-danger">
-                                                            Returned
-                                                        </div>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $aidForaidDistributionCampaign->Note }}</td>
-
-                                                <td>
-                                                    @if($aidForaidDistributionCampaign->StatusReceiptStoreKeeper == 0)
+                                                    @if($aidForAidReceiving->statusAcceptStoreKeeper == 0)
                                                     <div class="row gutters">
                                                         <div class="col-sm-12">
                                                             <div class="card-body">
                                                                 <div class="custom-dropdown-group">
                                                                     <div class="dropdown">
-                                                                        <button class="btn btn-primary dropdown-toggle"
-                                                                            type="button" id="dropdownMenuButton"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">
+                                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton-{{ $aidForAidReceiving->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             Action
                                                                         </button>
-                                                                        <div class="dropdown-menu"
-                                                                            aria-labelledby="dropdownMenuButton">
-       
-
-                                                                                <form method="post" action="{{ route('employe.storeKeeper.aidDistributionCampaigns.aid.accept', $aidForaidDistributionCampaign->id) }}">
-                                                                                    @csrf
-                                                                                    @method('put')
-                                                                                    <input type="hidden" name="aidDistributionCampaignsID" value="{{$aidDistributionCampaignsID}}"/>
-                                                                                    <button class="dropdown-item" type="submit">Accept</button>
-
-                                                                                </form>
-
-
-                                                                                <form method="post" action="{{ route('employe.storeKeeper.aidDistributionCampaigns.aid.reject', $aidForaidDistributionCampaign->id) }}">
-                                                                                    @csrf
-                                                                                    @method('put')
-                                                                                    <input type="hidden" name="aidDistributionCampaignsID" value="{{$aidDistributionCampaignsID}}"/>
-                                                                                    <button class="dropdown-item" type="submit">Reject</button>
-
-                                                                                </form>
-
+                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-{{ $aidForAidReceiving->id }}">
+                                                                            <!-- Accept Form -->
+                                                                            <form method="post" action="{{ route('employe.storeKeeper.aidReceiving.aid.accept', $aidForAidReceiving->id) }}">
+                                                                                @csrf
+                                                                                @method('put')
+                                                                                <input type="hidden" name="aidReceivingID" value="{{ $aidReceivingID }}" />
+                                                                                <button class="dropdown-item" type="submit">Accept</button>
+                                                                            </form>
+                                
+                                                                            <button class="dropdown-item" type="button" onclick="showRejectForm({{ $aidForAidReceiving->id }})">Reject</button>
                                                                         </div>
+                                
+                                                                        <!-- Reject Form (hidden by default) -->
+                                                                        <form id="reject-form-{{ $aidForAidReceiving->id }}" method="post" action="{{ route('employe.storeKeeper.aidReceiving.aid.reject', $aidForAidReceiving->id) }}" style="display: none; margin-top: 10px;">
+                                                                            @csrf
+                                                                            @method('put')
+                                                                            <input type="hidden" name="aidReceivingID" value="{{ $aidReceivingID }}" />
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" name="reasonOfRefuse" placeholder="Reason for Rejection" required />
+                                                                            </div>
+                                                                            <button class="btn btn-danger" type="submit">Submit Rejection</button>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -213,11 +191,22 @@
                                                     </div>
                                                     @endif
                                                 </td>
-
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                
+                                <!-- Include this script at the end of your Blade template -->
+                                <script>
+                                    function showRejectForm(id) {
+                                        // Hide the dropdown menu button
+                                        document.getElementById('dropdownMenuButton-' + id).style.display = 'none';
+                                        
+                                        // Show the reject form
+                                        document.getElementById('reject-form-' + id).style.display = 'block';
+                                    }
+                                </script>
+                                
                             </div>
                         </div>
 
@@ -274,6 +263,7 @@
     <!-- Main JS -->
     <script src="{{ asset('DashboardAssets/js/main.js') }}"></script>
 
+   
 </body>
 
 </html>

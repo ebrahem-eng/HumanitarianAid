@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('returnedQuantity')->default('0');
             $table->string('ReasonForReturn')->default('-');
             $table->tinyInteger('AidDeliveryStatus')->default('0');
+            $table->tinyInteger('ReceiptFromStoreKeeperStatus')->default('0');
             $table->string('Note');
             $table->foreignId('AidDistributionID')->references('id')->on('aid_distribution_campaigns')->cascadeOnDelete();
             $table->foreignId('aidID')->references('id')->on('aids')->cascadeOnDelete();

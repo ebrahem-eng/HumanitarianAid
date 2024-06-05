@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Employe\AidReceivingEmploye\AidReceivingEmployeController;
 use App\Http\Controllers\Employe\Auth\AuthController;
+use App\Http\Controllers\Employe\DistributionAidEmploye\DistributionAidEmployeController;
 use App\Http\Controllers\Employe\ReconnaissanceEmploye\ReconnaissanceEmployeController;
 
 
@@ -113,4 +114,32 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
 
     Route::put('/storeKeeper/AidReceiving/reject/aid/{id}', [StoreKeeperEmployeController::class, 'aidReceivingAidReject'])->name('storeKeeper.aidReceiving.aid.reject');
     
+
+    //====================================== Distribution Aid Employe =================================
+
+    Route::get('/DistributionAid', [DistributionAidEmployeController::class, 'index'])->name('distributionAid.index');
+
+    Route::get('/DistributionAid/new', [DistributionAidEmployeController::class, 'newDistributionAid'])->name('distributionAid.aidDistributionCampaigns.new');
+
+    Route::get('/DistributionAid/new/aid/{id}', [DistributionAidEmployeController::class, 'aidDistributionCampaignsAid'])->name('distributionAid.aidDistributionCampaigns.aid');
+
+    Route::put('/DistributionAid/new/aid/acceptDelivery{id}', [DistributionAidEmployeController::class, 'aidDistributionCampaignsAidAcceptDelivery'])->name('distributionAid.aidDistributionCampaigns.aid.accept.delivery');
+
+    Route::put('/DistributionAid/new/aid/acceptDelivery/all/{id}', [DistributionAidEmployeController::class, 'aidDistributionCampaignsAidAcceptDeliveryAll'])->name('distributionAid.aidDistributionCampaigns.aid.accept.delivery.all');
+
+    Route::put('/DistributionAid/new/aid/returnAid/{id}', [DistributionAidEmployeController::class, 'aidDistributionCampaignsAidReturnedAid'])->name('distributionAid.aidDistributionCampaigns.aid.return.aid');
+    
+    Route::put('/DistributionAid/new/aid/acceptReceipt/{id}', [DistributionAidEmployeController::class, 'aidDistributionCampaignsAcceptReceipt'])->name('distributionAid.aidDistributionCampaigns.aid.accept.receipt');
+
+    Route::post('/DistributionAid/new/aid/delivery/association/{id}', [DistributionAidEmployeController::class, 'aidDistributionCampaignsDeliveryToAssociation'])->name('distributionAid.aidDistributionCampaigns.aid.delivery.association');
+
+    Route::get('/DistributionAid/association/new/request', [DistributionAidEmployeController::class, 'associationNewRequest'])->name('distributionAid.association.new.request');
+
+    Route::delete('/DistributionAid/association/new/request/delete/{id}', [DistributionAidEmployeController::class, 'associationDeleteNewRequest'])->name('distributionAid.association.delete.new.request');
+
+    Route::get('/DistributionAid/association/history/request', [DistributionAidEmployeController::class, 'associationHistoryRequest'])->name('distributionAid.association.history.request');
+
+    Route::get('/DistributionAid/profile/{id}', [DistributionAidEmployeController::class, 'showProfile'])->name('distributionAid.profile.show');
+
+    Route::put('/DistributionAid/profile/update/{id}', [DistributionAidEmployeController::class, 'updateProfile'])->name('distributionAid.employe.update.profile');
 });

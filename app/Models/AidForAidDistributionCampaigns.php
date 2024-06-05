@@ -16,6 +16,7 @@ class AidForAidDistributionCampaigns extends Model
         'returnedQuantity',
         'ReasonForReturn',
         'AidDeliveryStatus',
+        'ReceiptFromStoreKeeperStatus',
         'Note',
         'AidDistributionID',
         'aidID',

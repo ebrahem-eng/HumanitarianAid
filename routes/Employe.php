@@ -3,6 +3,7 @@
 use App\Http\Controllers\Employe\AidReceivingEmploye\AidReceivingEmployeController;
 use App\Http\Controllers\Employe\Auth\AuthController;
 use App\Http\Controllers\Employe\DistributionAidEmploye\DistributionAidEmployeController;
+use App\Http\Controllers\Employe\GarageEmployee\GarageEmployeeController;
 use App\Http\Controllers\Employe\ReconnaissanceEmploye\ReconnaissanceEmployeController;
 
 
@@ -142,4 +143,25 @@ Route::middleware(['Employe'])->name('employe.')->prefix('employe')->group(funct
     Route::get('/DistributionAid/profile/{id}', [DistributionAidEmployeController::class, 'showProfile'])->name('distributionAid.profile.show');
 
     Route::put('/DistributionAid/profile/update/{id}', [DistributionAidEmployeController::class, 'updateProfile'])->name('distributionAid.employe.update.profile');
+
+    //=========================== Garage Employe=======================
+
+    Route::get('/garage', [GarageEmployeeController::class, 'index'])->name('garage.index');
+
+    Route::get('/garage/create', [GarageEmployeeController::class, 'create'])->name('garage.create');
+
+    Route::post('/garage/store', [GarageEmployeeController::class, 'store'])->name('garage.store');
+
+    Route::get('/garage/edit/{id}', [GarageEmployeeController::class, 'edit'])->name('garage.edit');
+
+    Route::put('/garage/update/{id}', [GarageEmployeeController::class, 'update'])->name('garage.update');
+
+    Route::get('/garage/arhive', [GarageEmployeeController::class, 'archive'])->name('garage.archive');
+
+    Route::delete('/garage/softDelete/{id}', [GarageEmployeeController::class, 'softDelete'])->name('garage.softDelete');
+
+    Route::delete('/garage/forceDelete/{id}', [GarageEmployeeController::class, 'forceDelete'])->name('garage.forceDelete');
+
+    Route::get('/garage/restore/{id}', [GarageEmployeeController::class, 'restore'])->name('garage.restore');
+
 });
